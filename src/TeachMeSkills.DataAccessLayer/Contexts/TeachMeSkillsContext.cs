@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System;
+using TeachMeSkills.DataAccessLayer.Configurations;
 using TeachMeSkills.DataAccessLayer.Entities;
 
 namespace TeachMeSkills.DataAccessLayer.Contexts
@@ -18,6 +20,18 @@ namespace TeachMeSkills.DataAccessLayer.Contexts
         {
         }
 
+        /// <summary>
+        /// Todos.
+        /// </summary>
+        public DbSet<Todo> Todos { get; set; }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder = modelBuilder ?? throw new ArgumentNullException(nameof(modelBuilder));
+
+            modelBuilder.ApplyConfiguration(new TodoConfiguration());
+
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }
