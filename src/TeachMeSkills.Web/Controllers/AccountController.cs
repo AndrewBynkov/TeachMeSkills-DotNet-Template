@@ -40,7 +40,7 @@ namespace TeachMeSkills.Web.Controllers
                     UserName = model.Username,
                 };
 
-                var result = await _accountManger.RegisterAsync(model.Email, model.Username, model.Password);
+                var result = await _accountManger.SignUpAsync(model.Email, model.Username, model.Password);
                 if (result.Succeeded)
                 {
                     await _signInManager.SignInAsync(user, false);
@@ -54,6 +54,47 @@ namespace TeachMeSkills.Web.Controllers
             }
 
             return View(model);
+        }
+
+        [HttpGet]
+        public IActionResult SignIn(string returnUrl = null)
+        {
+            var signInViewModel = new SignInViewModel
+            {
+                ReturnUrl = returnUrl
+            };
+
+            return View(signInViewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> SignIn(SignInViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _signInManager.PasswordSignInAsync(model.Username, model.Password, model.RememberMe, false);
+                if (result.Succeeded)
+                {
+                    if (!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
+                    {
+                        return Redirect(model.ReturnUrl);
+                    }
+
+                    return RedirectToAction("Index", "Home");
+                }
+
+                ModelState.AddModelError(string.Empty, "Incorrect email and (or) password");
+            }
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> LogOut()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
         }
     }
 }

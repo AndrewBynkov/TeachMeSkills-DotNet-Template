@@ -3,17 +3,10 @@
 namespace TeachMeSkills.Web.ViewModels
 {
     /// <summary>
-    /// Sign up model.
+    /// Sign in model.
     /// </summary>
-    public class SignUpViewModel
+    public class SignInViewModel
     {
-        /// <summary>
-        /// Email.
-        /// </summary>
-        [Required]
-        [Display(Name = nameof(Email))]
-        public string Email { get; set; }
-
         /// <summary>
         /// Username.
         /// </summary>
@@ -29,13 +22,16 @@ namespace TeachMeSkills.Web.ViewModels
         [Display(Name = nameof(Password))]
         public string Password { get; set; }
 
+        // TODO: replace to constants
         /// <summary>
-        /// Password confirm.
+        /// Remember me.
         /// </summary>
-        [Required]
-        [Compare(nameof(Password), ErrorMessage = "Passwords are different")]
-        [DataType(DataType.Password)]
-        [Display(Name = "Confirm your password")]
-        public string PasswordConfirm { get; set; }
+        [Display(Name = "Remember me?")]
+        public bool RememberMe { get; set; }
+
+        /// <summary>
+        /// Return url.
+        /// </summary>
+        public string ReturnUrl { get; set; }
     }
 }

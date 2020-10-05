@@ -16,7 +16,7 @@ namespace TeachMeSkills.BusinessLogicLayer.Managers
             _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
         }
 
-        public async Task<IdentityResult> RegisterAsync(string email, string userName, string password)
+        public async Task<IdentityResult> SignUpAsync(string email, string userName, string password)
         {
             var user = new User 
             { 
