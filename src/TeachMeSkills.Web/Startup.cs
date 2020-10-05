@@ -4,8 +4,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using TeachMeSkills.BusinessLogicLayer.Interfaces;
 using TeachMeSkills.BusinessLogicLayer.Managers;
-using TeachMeSkills.Common.Interfaces;
+using TeachMeSkills.BusinessLogicLayer.Repository;
 using TeachMeSkills.DataAccessLayer.Contexts;
 using TeachMeSkills.DataAccessLayer.Entities;
 
@@ -22,14 +23,21 @@ namespace TeachMeSkills.Web
 
         public void ConfigureServices(IServiceCollection services)
         {
+            // Repository pattern (Generic)
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+
+            // Managers
             services.AddScoped<IAccountManger, AccountManger>();
 
+            // Database context
             services.AddDbContext<TeachMeSkillsContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("TeachMeSkillsConnection")));
 
+            // ASP.NET Core Identity
             services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<TeachMeSkillsContext>();
 
+            // Microsoft services
             services.AddControllersWithViews();
         }
 

@@ -5,6 +5,7 @@
     /// </summary>
     public enum PriorityType
     {
+        // TODO: Use it
         /// <summary>
         /// Unknown.
         /// </summary>

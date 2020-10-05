@@ -91,7 +91,7 @@ namespace TeachMeSkills.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> LogOut()
+        public async Task<IActionResult> SignOut()
         {
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");

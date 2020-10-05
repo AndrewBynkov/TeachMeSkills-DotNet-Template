@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System;
 using System.Threading.Tasks;
-using TeachMeSkills.Common.Interfaces;
+using TeachMeSkills.BusinessLogicLayer.Interfaces;
 using TeachMeSkills.DataAccessLayer.Entities;
 
 namespace TeachMeSkills.BusinessLogicLayer.Managers
@@ -18,8 +18,8 @@ namespace TeachMeSkills.BusinessLogicLayer.Managers
 
         public async Task<IdentityResult> SignUpAsync(string email, string userName, string password)
         {
-            var user = new User 
-            { 
+            var user = new User
+            {
                 Email = email,
                 UserName = userName,
             };

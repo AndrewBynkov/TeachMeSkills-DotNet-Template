@@ -1,4 +1,4 @@
-﻿namespace TeachMeSkills.Common.Interfaces
+﻿namespace TeachMeSkills.DataAccessLayer.Interfaces
 {
     /// <summary>
     /// Interface for implement identity.

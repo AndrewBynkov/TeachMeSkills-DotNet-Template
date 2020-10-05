@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
 
-namespace TeachMeSkills.Common.Interfaces
+namespace TeachMeSkills.BusinessLogicLayer.Interfaces
 {
     /// <summary>
     /// Account manager.

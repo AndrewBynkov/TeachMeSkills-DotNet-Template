@@ -1,5 +1,5 @@
 ﻿using System;
-using TeachMeSkills.Common.Interfaces;
+using TeachMeSkills.DataAccessLayer.Interfaces;
 
 namespace TeachMeSkills.DataAccessLayer.Entities
 {
