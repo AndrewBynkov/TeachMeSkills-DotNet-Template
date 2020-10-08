@@ -1,25 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using TeachMeSkills.Common.Interfaces;
+using System;
+using System.Threading.Tasks;
+using TeachMeSkills.BusinessLogicLayer.Interfaces;
 using TeachMeSkills.DataAccessLayer.Entities;
 using TeachMeSkills.Web.ViewModels;
 
 namespace TeachMeSkills.Web.Controllers
 {
+    public class SimpleObject
+    {
+        public string MyProperty { get; set; }
+    }
+
     public class AccountController : Controller
     {
-        private readonly IAccountManger _accountManger;
+        private readonly IAccountManager _accountManger;
         private readonly SignInManager<User> _signInManager;
 
-        public AccountController(IAccountManger accountManger,
+        public AccountController(IAccountManager accountManger,
                                  SignInManager<User> signInManager)
         {
             _accountManger = accountManger ?? throw new ArgumentNullException(nameof(accountManger));
             _signInManager = signInManager ?? throw new ArgumentNullException(nameof(signInManager));
+        }
+
+        public IActionResult Test(int id, [FromQuery] int que, [FromBody] SimpleObject val, [FromHeader] string superSecretKey)
+        {
+            var str = id.ToString() + que.ToString() + val.MyProperty + superSecretKey;
+            return Content(str);
         }
 
         [HttpGet]

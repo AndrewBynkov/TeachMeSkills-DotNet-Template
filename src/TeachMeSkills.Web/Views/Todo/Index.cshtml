@@ -1,0 +1,23 @@
+﻿@model IEnumerable<TodoViewModel>
+
+@{
+    ViewData["Title"] = "Todos";
+}
+
+@if (Model.Any())
+{
+    foreach (var todo in Model)
+    {
+        <div>@todo.Title</div>
+        <div>@todo.Description</div>
+        <div>@todo.Priority</div>
+        <div>@todo.IsActive</div>
+        <div>@todo.Created</div>
+        <div>@todo.Closed</div>
+    }
+    <br />
+}
+else
+{
+    <div>Todo list is empty</div>
+}

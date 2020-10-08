@@ -27,7 +27,8 @@ namespace TeachMeSkills.Web
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
             // Managers
-            services.AddScoped<IAccountManger, AccountManger>();
+            services.AddScoped<IAccountManager, AccountManager>();
+            services.AddScoped<ITodoManager, TodoManager>();
 
             // Database context
             services.AddDbContext<TeachMeSkillsContext>(options =>

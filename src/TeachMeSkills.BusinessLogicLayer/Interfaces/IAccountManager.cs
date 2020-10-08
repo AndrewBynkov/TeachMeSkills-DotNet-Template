@@ -6,7 +6,7 @@ namespace TeachMeSkills.BusinessLogicLayer.Interfaces
     /// <summary>
     /// Account manager.
     /// </summary>
-    public interface IAccountManger
+    public interface IAccountManager
     {
         /// <summary>
         /// Sign up.
@@ -15,5 +15,12 @@ namespace TeachMeSkills.BusinessLogicLayer.Interfaces
         /// <param name="password">Password.</param>
         /// <returns>Identity result.</returns>
         Task<IdentityResult> SignUpAsync(string email, string userName, string password);
+
+        /// <summary>
+        /// Get user identifier by name.
+        /// </summary>
+        /// <param name="name">User name.</param>
+        /// <returns>Identifier (GUID).</returns>
+        Task<string> GetUserIdByNameAsync(string name);
     }
 }

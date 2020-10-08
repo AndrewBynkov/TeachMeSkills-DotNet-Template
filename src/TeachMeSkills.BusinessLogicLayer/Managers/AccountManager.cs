@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Threading.Tasks;
 using TeachMeSkills.BusinessLogicLayer.Interfaces;
@@ -6,12 +7,12 @@ using TeachMeSkills.DataAccessLayer.Entities;
 
 namespace TeachMeSkills.BusinessLogicLayer.Managers
 {
-    /// <inheritdoc cref="IAccountManger"/>
-    public class AccountManger : IAccountManger
+    /// <inheritdoc cref="IAccountManager"/>
+    public class AccountManager : IAccountManager
     {
         private readonly UserManager<User> _userManager;
 
-        public AccountManger(UserManager<User> userManager)
+        public AccountManager(UserManager<User> userManager)
         {
             _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
         }
@@ -25,6 +26,12 @@ namespace TeachMeSkills.BusinessLogicLayer.Managers
             };
 
             return await _userManager.CreateAsync(user, password);
+        }
+
+        public async Task<string> GetUserIdByNameAsync(string name)
+        {
+            var user = await _userManager.Users.FirstAsync(u => u.UserName == name);
+            return user.Id;
         }
     }
 }
