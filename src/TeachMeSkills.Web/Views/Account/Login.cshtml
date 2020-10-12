@@ -1,12 +1,12 @@
-﻿@model SignInViewModel
+﻿@model LoginViewModel
 
 @{
-    ViewData["Title"] = "Sign in page";
+    ViewData["Title"] = "Login page";
 }
 
-<h1>Sign in page</h1>
+<h1>Login page</h1>
 
-<form method="post" asp-controller="Account" asp-action="SignIN" asp-route-returnUrl="@Model.ReturnUrl">
+<form method="post" asp-controller="Account" asp-action="Login" asp-route-returnUrl="@Model.ReturnUrl">
     <div asp-validation-summary="ModelOnly"></div>
     <div>
         <label asp-for="Username"></label>
@@ -23,6 +23,6 @@
         <input asp-for="RememberMe" />
     </div>
     <div>
-        <input type="submit" value="Enter" />
+        <input type="submit" value="Login" />
     </div>
 </form>

@@ -3,7 +3,7 @@
 namespace TeachMeSkills.Web.ViewModels
 {
     /// <summary>
-    /// Todo list view 
+    /// Todo list view model.
     /// </summary>
     public class TodoViewModel
     {

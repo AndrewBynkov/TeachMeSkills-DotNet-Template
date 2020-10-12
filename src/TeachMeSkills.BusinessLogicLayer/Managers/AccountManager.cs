@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Threading.Tasks;
 using TeachMeSkills.BusinessLogicLayer.Interfaces;
+using TeachMeSkills.BusinessLogicLayer.Models;
 using TeachMeSkills.DataAccessLayer.Entities;
 
 namespace TeachMeSkills.BusinessLogicLayer.Managers
@@ -17,15 +18,15 @@ namespace TeachMeSkills.BusinessLogicLayer.Managers
             _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
         }
 
-        public async Task<IdentityResult> SignUpAsync(string email, string userName, string password)
+        public async Task<IdentityResult> SignUpAsync(UserDto userDto)
         {
             var user = new User
             {
-                Email = email,
-                UserName = userName,
+                Email = userDto.Email,
+                UserName = userDto.Username,
             };
 
-            return await _userManager.CreateAsync(user, password);
+            return await _userManager.CreateAsync(user, userDto.Password);
         }
 
         public async Task<string> GetUserIdByNameAsync(string name)

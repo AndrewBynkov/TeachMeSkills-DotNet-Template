@@ -3,9 +3,9 @@
 namespace TeachMeSkills.Web.ViewModels
 {
     /// <summary>
-    /// Sign in model.
+    /// Login view model.
     /// </summary>
-    public class SignInViewModel
+    public class LoginViewModel
     {
         /// <summary>
         /// Username.

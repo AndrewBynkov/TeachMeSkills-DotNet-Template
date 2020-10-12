@@ -35,7 +35,7 @@ namespace TeachMeSkills.Web.Controllers
                     Id = todoDto.Id,
                     Title = todoDto.Title,
                     Description = todoDto.Description,
-                    Priority = PriorityTypeExtension.ToLocal(todoDto.Priority),
+                    Priority = todoDto.PriorityType.ToLocal(),
                     IsActive = todoDto.IsActive,
                     Created = todoDto.Created,
                     Closed = todoDto.Closed

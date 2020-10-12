@@ -1,18 +1,15 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
 using TeachMeSkills.BusinessLogicLayer.Interfaces;
+using TeachMeSkills.BusinessLogicLayer.Models;
 using TeachMeSkills.DataAccessLayer.Entities;
 using TeachMeSkills.Web.ViewModels;
 
 namespace TeachMeSkills.Web.Controllers
 {
-    public class SimpleObject
-    {
-        public string MyProperty { get; set; }
-    }
-
     public class AccountController : Controller
     {
         private readonly IAccountManager _accountManger;
@@ -25,33 +22,39 @@ namespace TeachMeSkills.Web.Controllers
             _signInManager = signInManager ?? throw new ArgumentNullException(nameof(signInManager));
         }
 
-        public IActionResult Test(int id, [FromQuery] int que, [FromBody] SimpleObject val, [FromHeader] string superSecretKey)
+        [Authorize]
+        public IActionResult Secret(int id, [FromQuery] string query, [FromBody] SecretViewModel secret, [FromHeader] string secretValue)
         {
-            var str = id.ToString() + que.ToString() + val.MyProperty + superSecretKey;
-            return Content(str);
+            return Content($"Route: {id}, Query: {query}, Body: {secret.Key}, Header: {secretValue}");
         }
 
         [HttpGet]
-        public IActionResult SignUp()
+        public IActionResult Register()
         {
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> SignUp(SignUpViewModel model)
+        public async Task<IActionResult> Register(RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
-                // TODO: refactor it
-                var user = new User
+                var userDto = new UserDto
                 {
                     Email = model.Email,
-                    UserName = model.Username,
+                    Username = model.Username,
+                    Password = model.Password
                 };
 
-                var result = await _accountManger.SignUpAsync(model.Email, model.Username, model.Password);
+                var result = await _accountManger.SignUpAsync(userDto);
                 if (result.Succeeded)
                 {
+                    var user = new User
+                    {
+                        Email = model.Email,
+                        UserName = model.Username,
+                    };
+
                     await _signInManager.SignInAsync(user, false);
                     return RedirectToAction("Index", "Home");
                 }
@@ -66,9 +69,9 @@ namespace TeachMeSkills.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult SignIn(string returnUrl = null)
+        public IActionResult Login(string returnUrl = null)
         {
-            var signInViewModel = new SignInViewModel
+            var signInViewModel = new LoginViewModel
             {
                 ReturnUrl = returnUrl
             };
@@ -78,7 +81,7 @@ namespace TeachMeSkills.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> SignIn(SignInViewModel model)
+        public async Task<IActionResult> Login(LoginViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -100,7 +103,7 @@ namespace TeachMeSkills.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> SignOut()
+        public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");

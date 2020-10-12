@@ -3,9 +3,9 @@
 namespace TeachMeSkills.Web.ViewModels
 {
     /// <summary>
-    /// Sign up model.
+    /// Register view model.
     /// </summary>
-    public class SignUpViewModel
+    public class RegisterViewModel
     {
         /// <summary>
         /// Email.

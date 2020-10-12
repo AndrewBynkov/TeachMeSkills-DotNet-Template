@@ -1,4 +1,5 @@
 ﻿using System;
+using TeachMeSkills.Common.Enums;
 using TeachMeSkills.DataAccessLayer.Interfaces;
 
 namespace TeachMeSkills.DataAccessLayer.Entities
@@ -32,7 +33,7 @@ namespace TeachMeSkills.DataAccessLayer.Entities
         /// <summary>
         /// Priority.
         /// </summary>
-        public int Priority { get; set; }
+        public PriorityType PriorityType { get; set; }
 
         /// <summary>
         /// IsActive.

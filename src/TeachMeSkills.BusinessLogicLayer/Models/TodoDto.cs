@@ -1,4 +1,5 @@
 ﻿using System;
+using TeachMeSkills.Common.Enums;
 
 namespace TeachMeSkills.BusinessLogicLayer.Models
 {
@@ -30,7 +31,7 @@ namespace TeachMeSkills.BusinessLogicLayer.Models
         /// <summary>
         /// Priority.
         /// </summary>
-        public int Priority { get; set; }
+        public PriorityType PriorityType { get; set; }
 
         /// <summary>
         /// IsActive.

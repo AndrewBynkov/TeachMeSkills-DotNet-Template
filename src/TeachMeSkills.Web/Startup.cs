@@ -40,6 +40,11 @@ namespace TeachMeSkills.Web
 
             // Microsoft services
             services.AddControllersWithViews();
+            services.ConfigureApplicationCookie(config =>
+            {
+                config.Cookie.Name = "TeachMeSkills.Cookie";
+                //config.LoginPath = "/Account/SignIn";
+            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

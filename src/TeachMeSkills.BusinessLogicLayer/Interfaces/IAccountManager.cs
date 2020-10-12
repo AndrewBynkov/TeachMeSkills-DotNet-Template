@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
+using TeachMeSkills.BusinessLogicLayer.Models;
 
 namespace TeachMeSkills.BusinessLogicLayer.Interfaces
 {
@@ -11,10 +12,9 @@ namespace TeachMeSkills.BusinessLogicLayer.Interfaces
         /// <summary>
         /// Sign up.
         /// </summary>
-        /// <param name="email">Email.</param>
-        /// <param name="password">Password.</param>
+        /// <param name="userDto">User data transfer object.</param>
         /// <returns>Identity result.</returns>
-        Task<IdentityResult> SignUpAsync(string email, string userName, string password);
+        Task<IdentityResult> SignUpAsync(UserDto userDto);
 
         /// <summary>
         /// Get user identifier by name.

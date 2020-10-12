@@ -21,13 +21,18 @@ namespace TeachMeSkills.BusinessLogicLayer.Managers
 
         public async Task<IEnumerable<TodoDto>> GetTodosByUserIdAsync(string userId)
         {
+            var todoDtos = new List<TodoDto>();
             var todos = await _repositoryTodo
                 .GetAll()
                 .AsNoTracking()
                 .Where(todo => todo.UserId == userId)
                 .ToListAsync();
 
-            var todoDtos = new List<TodoDto>();
+            if (!todos.Any())
+            {
+                return todoDtos;
+            }
+
             foreach (var todo in todos)
             {
                 todoDtos.Add(new TodoDto
@@ -36,7 +41,7 @@ namespace TeachMeSkills.BusinessLogicLayer.Managers
                     UserId = todo.UserId,
                     Title = todo.Title,
                     Description = todo.Description,
-                    Priority = todo.Priority,
+                    PriorityType = todo.PriorityType,
                     IsActive = todo.IsActive,
                     Created = todo.Created,
                     Closed = todo.Closed
