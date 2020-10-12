@@ -8,16 +8,39 @@
 {
     foreach (var todo in Model)
     {
-        <div>@todo.Title</div>
-        <div>@todo.Description</div>
-        <div>@todo.Priority</div>
-        <div>@todo.IsActive</div>
-        <div>@todo.Created</div>
-        <div>@todo.Closed</div>
+        if (todo.IsActive)
+        {
+            var priority = todo.Priority > 1
+                ? "todo__high"
+                : string.Empty;
+
+            <div class="todo todo__indent-bottom @priority" title="@todo.Description">
+                <div class="todo__wrapper">
+                    <span class="todo__text @priority">@todo.Title</span>
+                    <a class="todo__progress">
+                        <img src="/images/in-progress.svg" alt="" srcset="">
+                    </a>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="todo todo__indent-bottom todo__task-completed" title="@todo.Description">
+                <div class="todo__wrapper">
+                    <span class="todo__text todo__text-completed">@todo.Title</span>
+                    <a class="todo__progress">
+                        <img src="/images/completed.svg" alt="" srcset="">
+                    </a>
+                </div>
+            </div>
+        }
     }
-    <br />
 }
 else
 {
     <div>Todo list is empty</div>
+}
+
+@section css {
+    <link href="~/css/todo.css" rel="stylesheet" />
 }

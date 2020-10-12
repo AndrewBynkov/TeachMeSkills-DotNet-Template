@@ -2,19 +2,9 @@
     ViewData["Title"] = "Index page";
 }
 
-<h1>Index page</h1>
+<h1 style="margin-bottom: 8px">Welcome!</h1>
 
 @if (User.Identity.IsAuthenticated)
 {
-    <a asp-controller="Todo" asp-action="Index">Todo</a>
-    <p>@User.Identity.Name</p>
-
-    <form method="post" asp-controller="Account" asp-action="Logout">
-        <button type="submit">Logout</button>
-    </form>
-}
-else
-{
-    <a asp-controller="Account" asp-action="Register">Register</a>
-    <a asp-controller="Account" asp-action="Login">Login</a>
+    <a class="button button__link" asp-controller="Todo" asp-action="Index">Go to todos</a>
 }

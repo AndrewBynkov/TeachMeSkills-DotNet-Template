@@ -39,7 +39,8 @@ namespace TeachMeSkills.Web
                 .AddEntityFrameworkStores<TeachMeSkillsContext>();
 
             // Microsoft services
-            services.AddControllersWithViews();
+            services.AddControllersWithViews()
+                .AddRazorRuntimeCompilation(); ;
             services.ConfigureApplicationCookie(config =>
             {
                 config.Cookie.Name = "TeachMeSkills.Cookie";

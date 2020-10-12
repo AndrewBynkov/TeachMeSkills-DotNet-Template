@@ -25,7 +25,7 @@ namespace TeachMeSkills.Web.ViewModels
         /// <summary>
         /// Priority.
         /// </summary>
-        public string Priority { get; set; }
+        public int Priority { get; set; }
 
         /// <summary>
         /// IsActive.

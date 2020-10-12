@@ -4,10 +4,37 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
+    <link href="~/css/app.css" rel="stylesheet" />
+    @RenderSection("css", false)
 </head>
 <body>
-    <div>
+    <header>
+        <div class="wrapper">
+            <div class="header header__indent-bottom">
+                <div class="logo">ToDo App</div>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <div class="auth">
+                        <span class="auth__name">@User.Identity.Name</span>
+                        <form method="post" asp-controller="Account" asp-action="Logout">
+                            <button class="button" type="submit">Logout</button>
+                        </form>
+                    </div>
+                }
+                else
+                {
+                    <div class="auth">
+                        <a class="link" asp-controller="Account" asp-action="Login">Login</a>
+                        <a class="button button__link" asp-controller="Account" asp-action="Register">Register</a>
+                    </div>
+                }
+            </div>
+        </div>
+    </header>
+
+    <div class="wrapper">
         @RenderBody()
     </div>
+
 </body>
 </html>

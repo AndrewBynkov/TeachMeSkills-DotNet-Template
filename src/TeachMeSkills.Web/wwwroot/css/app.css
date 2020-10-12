@@ -1,0 +1,114 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Montserrat", sans-serif;
+}
+
+body {
+    background: #F2F5F7;
+}
+
+header {
+    background: #ffffff;
+}
+
+h1 {
+    color: #242e4C;
+}
+
+.wrapper {
+    width: 1000px;
+    margin: 0 auto;
+}
+
+header {
+    background: #ffffff;
+}
+
+.header {
+    padding: 20px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header__indent-bottom {
+    margin-bottom: 32px;
+}
+
+.logo {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 27px;
+    color: #242e4c;
+}
+
+.auth {
+    width: 200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.auth__name {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    color: #242e4c;
+}
+
+.link {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    color: #152f46;
+    text-decoration: none;
+}
+
+    .link:hover {
+        text-decoration: underline;
+    }
+
+.button {
+    cursor: pointer;
+    padding: 6px 16px;
+    background: #152f46;
+    border-radius: 3px;
+    border: none;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 17px;
+    letter-spacing: 1.3px;
+    text-transform: uppercase;
+    color: #ffffff;
+}
+
+    .button:hover {
+        background: #2e5e87;
+    }
+
+.button__link {
+    text-decoration: none;
+}
+
+.input {
+    padding: 8px 16px;
+    border: 1px solid #BECCD4;
+    box-sizing: border-box;
+    border-radius: 5px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 20px;
+    color: #738188;
+}
+
+.indent__margin-bottom {
+    margin-bottom: 8px;
+}

@@ -1,0 +1,46 @@
+﻿.todo {
+    padding: 20px 20px;
+    background: #FFFFFF;
+    border-radius: 5px;
+    cursor: help;
+}
+
+.todo__indent-bottom {
+    margin-bottom: 8px;
+}
+
+.todo__wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.todo__text {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 20px;
+    color: #242e4c;
+}
+
+.todo__high {
+    background: #985bff;
+    color: #ffffff;
+}
+
+.todo__image {
+    cursor: pointer;
+}
+
+.todo__progress {
+    cursor: pointer;
+}
+
+.todo__task-completed {
+    background: none;
+}
+
+.todo__text-completed {
+    color: #a2b6c2;
+    text-decoration: line-through;
+}

@@ -4,25 +4,23 @@
     ViewData["Title"] = "Login page";
 }
 
-<h1>Login page</h1>
+<h1 class="indent__margin-bottom">Login</h1>
 
 <form method="post" asp-controller="Account" asp-action="Login" asp-route-returnUrl="@Model.ReturnUrl">
     <div asp-validation-summary="ModelOnly"></div>
-    <div>
-        <label asp-for="Username"></label>
-        <input asp-for="Username" />
+    <div class="indent__margin-bottom">
+        <input class="input" asp-for="Username" placeholder="Username" type="text" />
         <span asp-validation-for="Username"></span>
     </div>
-    <div>
-        <label asp-for="Password"></label>
-        <input asp-for="Password" />
+    <div class="indent__margin-bottom">
+        <input class="input" asp-for="Password" placeholder="********" type="password" />
         <span asp-validation-for="Password"></span>
     </div>
-    <div>
+    <div class="indent__margin-bottom">
         <label asp-for="RememberMe"></label>
         <input asp-for="RememberMe" />
     </div>
-    <div>
-        <input type="submit" value="Login" />
+    <div class="indent__margin-bottom">
+        <button class="button" type="submit">Login</button>
     </div>
 </form>
