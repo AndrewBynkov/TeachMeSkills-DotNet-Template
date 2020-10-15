@@ -22,5 +22,21 @@ namespace TeachMeSkills.Common.Extensions
                 _ => "Unknown",
             };
         }
+
+        /// <summary>
+        /// Convert int to PriorityType.
+        /// </summary>
+        /// <param name="priorityType">Priority type (int).</param>
+        /// <returns>PriorityType value.</returns>
+        public static PriorityType ToPriorityType(int priorityType)
+        {
+            return priorityType switch
+            {
+                (int)PriorityType.Low => PriorityType.Low,
+                (int)PriorityType.Medium => PriorityType.Medium,
+                (int)PriorityType.High => PriorityType.High,
+                _ => PriorityType.Unknown,
+            };
+        }
     }
 }

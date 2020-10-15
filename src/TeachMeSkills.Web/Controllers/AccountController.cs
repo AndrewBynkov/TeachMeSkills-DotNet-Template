@@ -8,6 +8,14 @@ using TeachMeSkills.BusinessLogicLayer.Models;
 using TeachMeSkills.DataAccessLayer.Entities;
 using TeachMeSkills.Web.ViewModels;
 
+// TODO:
+//logo click go to index
+//titles
+//share todo
+// any method
+// email sender
+// mobile and table design
+
 namespace TeachMeSkills.Web.Controllers
 {
     public class AccountController : Controller

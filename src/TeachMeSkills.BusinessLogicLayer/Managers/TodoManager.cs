@@ -19,6 +19,27 @@ namespace TeachMeSkills.BusinessLogicLayer.Managers
             _repositoryTodo = repositoryTodo ?? throw new ArgumentNullException(nameof(repositoryTodo));
         }
 
+        public Task ChangeTodoStatusAsync(string userId, int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task CreateAsync(TodoDto todoDto)
+        {
+            var todo = new Todo
+            {
+                UserId = todoDto.UserId,
+                Title = todoDto.Title,
+                Description = todoDto.Description,
+                PriorityType = todoDto.PriorityType,
+                IsActive = true,
+                Created = DateTime.Now,
+            };
+
+            await _repositoryTodo.CreateAsync(todo);
+            await _repositoryTodo.SaveChangesAsync();
+        }
+
         public async Task<IEnumerable<TodoDto>> GetTodosByUserIdAsync(string userId)
         {
             var todoDtos = new List<TodoDto>();

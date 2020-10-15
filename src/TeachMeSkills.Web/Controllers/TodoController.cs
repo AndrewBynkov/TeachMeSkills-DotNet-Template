@@ -1,10 +1,14 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using TeachMeSkills.BusinessLogicLayer.Interfaces;
+using TeachMeSkills.BusinessLogicLayer.Models;
+using TeachMeSkills.Common.Enums;
 using TeachMeSkills.Common.Extensions;
+using TeachMeSkills.Web.Models;
 using TeachMeSkills.Web.ViewModels;
 
 namespace TeachMeSkills.Web.Controllers
@@ -43,6 +47,50 @@ namespace TeachMeSkills.Web.Controllers
             }
 
             return View(todoViewModels);
+        }
+
+        [HttpGet]
+        public IActionResult Create()
+        {
+            GeneratePriorityTypeList();
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(TodoActionViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var userId = await _accountManager.GetUserIdByNameAsync(User.Identity.Name);
+                var todoDto = new TodoDto
+                {
+                    UserId = userId,
+                    Title = model.Title,
+                    Description = model.Description,
+                    PriorityType = PriorityTypeExtension.ToPriorityType(model.Priority)
+                };
+
+                await _todoManager.CreateAsync(todoDto);
+
+                return RedirectToAction("Index", "Todo");
+            }
+
+            GeneratePriorityTypeList();
+            return View(model);
+        }
+
+        [NonAction]
+        private void GeneratePriorityTypeList()
+        {
+            IEnumerable<PriorityTypeModel> priorityTypes = new List<PriorityTypeModel>
+            {
+                new PriorityTypeModel { Id = (int)PriorityType.Low, Type = PriorityType.Low.ToLocal() },
+                new PriorityTypeModel { Id = (int)PriorityType.Medium, Type = PriorityType.Medium.ToLocal() },
+                new PriorityTypeModel { Id = (int)PriorityType.High, Type = PriorityType.High.ToLocal() }
+            };
+
+            ViewBag.PriorityTypes = new SelectList(priorityTypes, "Id", "Type");
         }
     }
 }

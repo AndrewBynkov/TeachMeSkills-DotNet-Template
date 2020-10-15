@@ -10,10 +10,23 @@ namespace TeachMeSkills.BusinessLogicLayer.Interfaces
     public interface ITodoManager
     {
         /// <summary>
-        /// Get todo by identifier.
+        /// Create todo by user identifier.
+        /// </summary>
+        /// <param name="todoDto">Todo data transfer object.</param>
+        Task CreateAsync(TodoDto todoDto);
+
+        /// <summary>
+        /// Get todo by user identifier.
         /// </summary>
         /// <param name="userId">User identifier.</param>
-        /// <returns>Todo.</returns>
+        /// <returns>List of Todo data transfer objects.</returns>
         Task<IEnumerable<TodoDto>> GetTodosByUserIdAsync(string userId);
+
+        /// <summary>
+        /// Change todo status.
+        /// </summary>
+        /// <param name="userId">User identifier.</param>
+        /// <param name="id">Identifier.</param>
+        Task ChangeTodoStatusAsync(string userId, int id);
     }
 }

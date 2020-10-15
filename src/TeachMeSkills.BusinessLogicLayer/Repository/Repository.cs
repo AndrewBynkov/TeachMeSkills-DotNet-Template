@@ -21,24 +21,14 @@ namespace TeachMeSkills.BusinessLogicLayer.Repository
             _dbSet = context.Set<T>();
         }
 
-        public async Task AddAsync(T entity)
+        public async Task CreateAsync(T entity)
         {
             await _dbSet.AddAsync(entity);
         }
 
-        public async Task AddRangeAsync(IEnumerable<T> entities)
+        public async Task CreateRangeAsync(IEnumerable<T> entities)
         {
             await _dbSet.AddRangeAsync(entities);
-        }
-
-        public void Delete(T entity)
-        {
-            _dbSet.Remove(entity);
-        }
-
-        public void DeleteRange(IEnumerable<T> entity)
-        {
-            _dbSet.RemoveRange(entity);
         }
 
         public IQueryable<T> GetAll()
@@ -51,14 +41,29 @@ namespace TeachMeSkills.BusinessLogicLayer.Repository
             return await _dbSet.FirstOrDefaultAsync(predicate);
         }
 
-        public Task SaveChangesAsync()
+        public async Task<T> GetEntityWithoutTrackingAsync(Expression<Func<T, bool>> predicate)
         {
-            return _context.SaveChangesAsync();
+            return await _dbSet.AsNoTracking().FirstOrDefaultAsync(predicate);
         }
 
         public void Update(T entity)
         {
             _context.Entry(entity).State = EntityState.Modified;
+        }
+
+        public void Delete(T entity)
+        {
+            _dbSet.Remove(entity);
+        }
+
+        public void DeleteRange(IEnumerable<T> entity)
+        {
+            _dbSet.RemoveRange(entity);
+        }
+
+        public Task SaveChangesAsync()
+        {
+            return _context.SaveChangesAsync();
         }
     }
 }
