@@ -9,12 +9,11 @@ using TeachMeSkills.DataAccessLayer.Entities;
 using TeachMeSkills.Web.ViewModels;
 
 // TODO:
-//logo click go to index
+// any method (update)
+
 //titles
 //share todo
-// any method
 // email sender
-// mobile and table design
 
 namespace TeachMeSkills.Web.Controllers
 {

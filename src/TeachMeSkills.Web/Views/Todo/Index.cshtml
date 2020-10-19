@@ -4,21 +4,27 @@
     ViewData["Title"] = "Todos";
 }
 
+<div class="indent__margin-bottom">
+    <a asp-controller="Todo" asp-action="Create">
+        <input class="button button__link button__orange" type="button" value="+ Add New" />
+    </a>
+</div>
+
 @if (Model.Any())
 {
     foreach (var todo in Model)
     {
+        //TODO: refactor it
         if (todo.IsActive)
         {
-            var priority = todo.Priority > 1
-                ? "todo__high"
-                : string.Empty;
-
-            <div class="todo todo__indent-bottom @priority" title="@todo.Description">
+            <div class="todo todo__indent-bottom @todo.Priority" title="@todo.Description">
                 <div class="todo__wrapper">
-                    <span class="todo__text @priority">@todo.Title</span>
-                    <a class="todo__progress">
-                        <img src="/images/in-progress.svg" alt="" srcset="">
+                    <a class="todo__text @todo.Priority" asp-controller="Todo" asp-action="Detail" asp-route-id="@todo.Id">
+                        <span>@todo.Title</span>
+                    </a>
+                    @*<span class="todo__text @todo.Priority">@todo.Title</span>*@
+                    <a class="todo__progress" asp-controller="Todo" asp-action="Complete" asp-route-id="@todo.Id">
+                        <img src="/images/in-progress.svg" alt="In progress">
                     </a>
                 </div>
             </div>
@@ -27,9 +33,12 @@
         {
             <div class="todo todo__indent-bottom todo__task-completed" title="@todo.Description">
                 <div class="todo__wrapper">
-                    <span class="todo__text todo__text-completed">@todo.Title</span>
-                    <a class="todo__progress">
-                        <img src="/images/completed.svg" alt="" srcset="">
+                    <a class="todo__text todo__text-completed" asp-controller="Todo" asp-action="Detail" asp-route-id="@todo.Id">
+                        <span>@todo.Title</span>
+                    </a>
+@*                    <span class="todo__text todo__text-completed">@todo.Title</span>*@
+                    <a class="todo__progress" asp-controller="Todo" asp-action="Delete" asp-route-id="@todo.Id">
+                        <img src="/images/completed.svg" alt="Completed">
                     </a>
                 </div>
             </div>
@@ -38,9 +47,9 @@
 }
 else
 {
-    <div>Todo list is empty</div>
+    <h1>Todo list is empty</h1>
 }
 
 @section css {
-    <link href="~/css/todo.css" rel="stylesheet" />
+    <link href="~/css/todo.css" rel="stylesheet" asp-append-version="true" />
 }

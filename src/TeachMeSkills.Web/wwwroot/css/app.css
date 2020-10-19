@@ -46,6 +46,14 @@ header {
     color: #242e4c;
 }
 
+    .logo:hover {
+        color: #2e5e87;
+    }
+
+.logo__link {
+    text-decoration: none;
+}
+
 .auth {
     width: 200px;
     display: flex;
@@ -97,6 +105,14 @@ header {
     text-decoration: none;
 }
 
+.button__orange {
+    background: #ffcf86;
+}
+
+    .button__orange:hover {
+        background: #fedea6;
+    }
+
 .input {
     padding: 8px 16px;
     border: 1px solid #BECCD4;
@@ -112,3 +128,22 @@ header {
 .indent__margin-bottom {
     margin-bottom: 8px;
 }
+
+.indent__margin-top {
+    margin-top: 8px;
+}
+
+@media screen and (max-width: 1020px) {
+    .wrapper {
+        width: 680px;
+        margin: 0 auto;
+    }
+}
+
+@media screen and (max-width: 760px) {
+    .wrapper {
+        width: 310px;
+        margin: 0 auto;
+    }
+}
+

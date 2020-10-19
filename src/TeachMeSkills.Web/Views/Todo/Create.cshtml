@@ -17,7 +17,7 @@
         <span asp-validation-for="Description"></span>
     </div>
     <div class="indent__margin-bottom">
-        <select id="priority" asp-for="Priority" asp-items="ViewBag.PriorityTypes"></select>
+        <select id="priority" class="input" asp-for="Priority" asp-items="ViewBag.PriorityTypes"></select>
         <span asp-validation-for="Priority"></span>
     </div>
     <div class="indent__margin-bottom">
@@ -26,5 +26,5 @@
 </form>
 
 @section js {
-    <script src="~/js/todo-create.js"></script>
+    <script src="~/js/todo-create.js" asp-append-version="true"></script>
 }

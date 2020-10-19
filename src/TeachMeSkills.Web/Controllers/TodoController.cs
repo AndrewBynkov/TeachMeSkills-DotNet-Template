@@ -29,7 +29,7 @@ namespace TeachMeSkills.Web.Controllers
         public async Task<IActionResult> Index()
         {
             var userId = await _accountManager.GetUserIdByNameAsync(User.Identity.Name);
-            var todoDtos = await _todoManager.GetTodosByUserIdAsync(userId);
+            var todoDtos = await _todoManager.GetTodosAsync(userId);
 
             var todoViewModels = new List<TodoViewModel>();
             foreach (var todoDto in todoDtos)
@@ -39,7 +39,7 @@ namespace TeachMeSkills.Web.Controllers
                     Id = todoDto.Id,
                     Title = todoDto.Title,
                     Description = todoDto.Description,
-                    Priority = (int)todoDto.PriorityType,
+                    Priority = todoDto.PriorityType.ValidatePriorityType(),
                     IsActive = todoDto.IsActive,
                     Created = todoDto.Created,
                     Closed = todoDto.Closed
@@ -78,6 +78,41 @@ namespace TeachMeSkills.Web.Controllers
 
             GeneratePriorityTypeList();
             return View(model);
+        }
+
+        public async Task<IActionResult> Detail(int id)
+        {
+            var userId = await _accountManager.GetUserIdByNameAsync(User.Identity.Name);
+            var todoDto = await _todoManager.GetTodoAsync(id, userId);
+
+            var todoViewModel = new TodoViewModel
+            {
+                Id = todoDto.Id,
+                Title = todoDto.Title,
+                Description = todoDto.Description,
+                Priority = todoDto.PriorityType.ToLocal(),
+                IsActive = todoDto.IsActive,
+                Created = todoDto.Created,
+                Closed = todoDto.Closed
+            };
+
+            return View(todoViewModel);
+        }
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            var userId = await _accountManager.GetUserIdByNameAsync(User.Identity.Name);
+            await _todoManager.DeleteAsync(id, userId);
+
+            return RedirectToAction("Index", "Todo");
+        }
+
+        public async Task<IActionResult> Complete(int id)
+        {
+            var userId = await _accountManager.GetUserIdByNameAsync(User.Identity.Name);
+            await _todoManager.ChangeTodoStatusAsync(id, userId);
+
+            return RedirectToAction("Index", "Todo");
         }
 
         [NonAction]

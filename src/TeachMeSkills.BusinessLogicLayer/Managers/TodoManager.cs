@@ -19,11 +19,6 @@ namespace TeachMeSkills.BusinessLogicLayer.Managers
             _repositoryTodo = repositoryTodo ?? throw new ArgumentNullException(nameof(repositoryTodo));
         }
 
-        public Task ChangeTodoStatusAsync(string userId, int id)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task CreateAsync(TodoDto todoDto)
         {
             var todo = new Todo
@@ -40,7 +35,30 @@ namespace TeachMeSkills.BusinessLogicLayer.Managers
             await _repositoryTodo.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<TodoDto>> GetTodosByUserIdAsync(string userId)
+        public async Task<TodoDto> GetTodoAsync(int id, string userId)
+        {
+            var todo = await _repositoryTodo.GetEntityWithoutTrackingAsync(todo => todo.Id == id && todo.UserId == userId);
+            if (todo is null)
+            {
+                return new TodoDto();
+            }
+
+            var todoDto = new TodoDto
+            {
+                Id = todo.Id,
+                UserId = todo.UserId,
+                Title = todo.Title,
+                Description = todo.Description,
+                PriorityType = todo.PriorityType,
+                IsActive = todo.IsActive,
+                Created = todo.Created,
+                Closed = todo.Closed
+            };
+
+            return todoDto;
+        }
+
+        public async Task<IEnumerable<TodoDto>> GetTodosAsync(string userId)
         {
             var todoDtos = new List<TodoDto>();
             var todos = await _repositoryTodo
@@ -70,6 +88,33 @@ namespace TeachMeSkills.BusinessLogicLayer.Managers
             }
 
             return todoDtos;
+        }
+
+        public async Task DeleteAsync(int id, string userId)
+        {
+            var todo = await _repositoryTodo.GetEntityAsync(todo => todo.Id == id && todo.UserId == userId);
+            if (todo is null)
+            {
+                return;
+            }
+
+            _repositoryTodo.Delete(todo);
+            await _repositoryTodo.SaveChangesAsync();
+        }
+
+        public async Task ChangeTodoStatusAsync(int id, string userId)
+        {
+            var todo = await _repositoryTodo.GetEntityAsync(todo => todo.Id == id && todo.UserId == userId);
+            if (todo is null)
+            {
+                return;
+            }
+
+            todo.IsActive = false;
+            todo.Closed = DateTime.Now;
+
+            _repositoryTodo.Update(todo);
+            await _repositoryTodo.SaveChangesAsync();
         }
     }
 }

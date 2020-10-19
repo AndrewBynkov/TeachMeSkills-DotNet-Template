@@ -11,7 +11,7 @@
     <header>
         <div class="wrapper">
             <div class="header header__indent-bottom">
-                <div class="logo">ToDo App</div>
+                <a class="logo logo__link" asp-controller="Home" asp-action="Index">ToDo App</a>
                 @if (User.Identity.IsAuthenticated)
                 {
                     <div class="auth">

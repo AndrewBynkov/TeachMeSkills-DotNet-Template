@@ -1,0 +1,21 @@
+﻿@model TodoViewModel
+
+@{
+    ViewData["Title"] = "Todo";
+
+    var closedDate = @Model.Closed.HasValue
+        ? @Model.Closed.ToString()
+        : "-";
+}
+
+
+
+<p class="todo__detail">Title: @Model.Title</p>
+<p>Description: @Model.Description</p>
+<p>Priority: @Model.Priority</p>
+<p>Created: @Model.Created</p>
+<p>Closed: @closedDate</p>
+
+@section css {
+    <link href="~/css/todo.css" rel="stylesheet" asp-append-version="true" />
+}

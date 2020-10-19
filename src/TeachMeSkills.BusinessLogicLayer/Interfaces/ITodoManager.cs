@@ -16,17 +16,32 @@ namespace TeachMeSkills.BusinessLogicLayer.Interfaces
         Task CreateAsync(TodoDto todoDto);
 
         /// <summary>
+        /// Get todo by identifier.
+        /// </summary>
+        /// <param name="id">Identifier.</param>
+        /// <param name="userId">User identifier.</param>
+        /// <returns>Todo data transfer objects.</returns>
+        Task<TodoDto> GetTodoAsync(int id, string userId);
+
+        /// <summary>
         /// Get todo by user identifier.
         /// </summary>
         /// <param name="userId">User identifier.</param>
         /// <returns>List of Todo data transfer objects.</returns>
-        Task<IEnumerable<TodoDto>> GetTodosByUserIdAsync(string userId);
+        Task<IEnumerable<TodoDto>> GetTodosAsync(string userId);
+
+        /// <summary>
+        /// Delete todo by identifier.
+        /// </summary>
+        /// <param name="id">Identifier.</param>
+        /// <param name="userId">User identifier.</param>
+        Task DeleteAsync(int id, string userId);
 
         /// <summary>
         /// Change todo status.
         /// </summary>
-        /// <param name="userId">User identifier.</param>
         /// <param name="id">Identifier.</param>
-        Task ChangeTodoStatusAsync(string userId, int id);
+        /// <param name="userId">User identifier.</param>
+        Task ChangeTodoStatusAsync(int id, string userId);
     }
 }

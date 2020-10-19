@@ -38,5 +38,21 @@ namespace TeachMeSkills.Common.Extensions
                 _ => PriorityType.Unknown,
             };
         }
+
+        /// <summary>
+        /// Validate PriorityType to CSS style.
+        /// </summary>
+        /// <param name="priorityType">Priority type (enum).</param>
+        /// <returns>CSS style.</returns>
+        public static string ValidatePriorityType(this PriorityType priorityType)
+        {
+            return priorityType switch
+            {
+                PriorityType.Low => string.Empty,
+                PriorityType.Medium => "todo__medium",
+                PriorityType.High => "todo__high",
+                _ => string.Empty,
+            };
+        }
     }
 }
