@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using NETCore.MailKit.Core;
 using System;
 using System.Threading.Tasks;
 using TeachMeSkills.BusinessLogicLayer.Interfaces;
@@ -11,7 +12,6 @@ using TeachMeSkills.Web.ViewModels;
 
 // TODO:
 
-//share todo
 // email sender
 
 namespace TeachMeSkills.Web.Controllers
@@ -20,12 +20,15 @@ namespace TeachMeSkills.Web.Controllers
     {
         private readonly IAccountManager _accountManger;
         private readonly SignInManager<User> _signInManager;
+        private readonly IEmailService _emailService;
 
         public AccountController(IAccountManager accountManger,
-                                 SignInManager<User> signInManager)
+                                 SignInManager<User> signInManager,
+                                 IEmailService emailService)
         {
             _accountManger = accountManger ?? throw new ArgumentNullException(nameof(accountManger));
             _signInManager = signInManager ?? throw new ArgumentNullException(nameof(signInManager));
+            _emailService = emailService ?? throw new ArgumentNullException(nameof(emailService));
         }
 
         [Authorize]
@@ -62,6 +65,9 @@ namespace TeachMeSkills.Web.Controllers
                     };
 
                     await _signInManager.SignInAsync(user, false);
+
+                    _emailService.Send(model.Email, "ToDo App", "Welcome to ToDo App!");
+
                     return RedirectToAction("Index", "Home");
                 }
 

@@ -4,6 +4,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using NETCore.MailKit.Extensions;
+using NETCore.MailKit.Infrastructure.Internal;
+using System;
 using TeachMeSkills.BusinessLogicLayer.Interfaces;
 using TeachMeSkills.BusinessLogicLayer.Managers;
 using TeachMeSkills.BusinessLogicLayer.Repository;
@@ -45,6 +48,22 @@ namespace TeachMeSkills.Web
             {
                 config.Cookie.Name = "TeachMeSkills.Cookie";
                 //config.LoginPath = "/Account/SignIn";
+            });
+
+            // NuGet services
+            var mailKitOptions = Configuration.GetSection("Mail").Get<MailKitOptions>();
+            services.AddMailKit(optionBuilder =>
+            {
+                optionBuilder.UseMailKit(new MailKitOptions()
+                {
+                    Server = mailKitOptions.Server,
+                    Port = mailKitOptions.Port,
+                    SenderName = mailKitOptions.SenderName,
+                    SenderEmail = mailKitOptions.SenderEmail,
+                    Account = mailKitOptions.Account,
+                    Password = mailKitOptions.Password,
+                    Security = true
+                });
             });
         }
 
