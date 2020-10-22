@@ -8,7 +8,15 @@
         : "-";
 }
 
+@if (!Model.Closed.HasValue)
+{
+    <div class="indent__margin-bottom">
+        <a asp-controller="Todo" asp-action="Edit" asp-route-id="@Model.Id">
+            <input class="button button__link button__red" type="button" value="Edit" />
+        </a>
+    </div>
 
+}
 
 <p class="todo__detail">Title: @Model.Title</p>
 <p>Description: @Model.Description</p>

@@ -113,6 +113,14 @@ header {
         background: #fedea6;
     }
 
+.button__red {
+    background: #fa6e5a;
+}
+
+    .button__red:hover {
+        background: #f05d48;
+    }
+
 .input {
     padding: 8px 16px;
     border: 1px solid #BECCD4;

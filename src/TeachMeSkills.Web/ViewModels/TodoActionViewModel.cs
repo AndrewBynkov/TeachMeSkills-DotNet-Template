@@ -9,6 +9,11 @@ namespace TeachMeSkills.Web.ViewModels
     public class TodoActionViewModel
     {
         /// <summary>
+        /// Identifier.
+        /// </summary>
+        public int Id { get; set; }
+
+        /// <summary>
         /// Title.
         /// </summary>
         [Required]

@@ -99,6 +99,49 @@ namespace TeachMeSkills.Web.Controllers
             return View(todoViewModel);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> EditAsync(int id)
+        {
+            var userId = await _accountManager.GetUserIdByNameAsync(User.Identity.Name);
+            var todoDto = await _todoManager.GetTodoAsync(id, userId);
+
+            var todoActionViewModel = new TodoActionViewModel
+            {
+                Id = todoDto.Id,
+                Title = todoDto.Title,
+                Description = todoDto.Description,
+                Priority = (int)todoDto.PriorityType,
+            };
+
+            GeneratePriorityTypeList();
+            return View(todoActionViewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(TodoActionViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var userId = await _accountManager.GetUserIdByNameAsync(User.Identity.Name);
+                var todoDto = new TodoDto
+                {
+                    Id = model.Id,
+                    UserId = userId,
+                    Title = model.Title,
+                    Description = model.Description,
+                    PriorityType = PriorityTypeExtension.ToPriorityType(model.Priority)
+                };
+
+                await _todoManager.UpdateAsync(todoDto);
+
+                return RedirectToAction("Index", "Todo");
+            }
+
+            GeneratePriorityTypeList();
+            return View(model);
+        }
+
         public async Task<IActionResult> Delete(int id)
         {
             var userId = await _accountManager.GetUserIdByNameAsync(User.Identity.Name);

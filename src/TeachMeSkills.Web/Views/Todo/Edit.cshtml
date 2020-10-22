@@ -1,0 +1,26 @@
+﻿@model TodoActionViewModel
+
+@{
+    ViewData["Title"] = "Edit todo page";
+}
+
+<h1 class="indent__margin-bottom">Edit todo</h1>
+
+<form method="post" asp-controller="Todo" asp-action="Edit">
+    <div asp-validation-summary="ModelOnly"></div>
+    <div class="indent__margin-bottom">
+        <input id="title" class="input" asp-for="Title" placeholder="Title" type="text"/>
+        <span asp-validation-for="Title"></span>
+    </div>
+    <div class="indent__margin-bottom">
+        <input id="description" class="input" asp-for="Description" placeholder="Description" type="text" />
+        <span asp-validation-for="Description"></span>
+    </div>
+    <div class="indent__margin-bottom">
+        <select id="priority" class="input" asp-for="Priority" asp-items="ViewBag.PriorityTypes"></select>
+        <span asp-validation-for="Priority"></span>
+    </div>
+    <div class="indent__margin-bottom">
+        <button id="button_confirm" class="button" type="submit">Confirm</button>
+    </div>
+</form>

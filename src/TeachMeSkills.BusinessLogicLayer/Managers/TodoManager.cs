@@ -90,6 +90,42 @@ namespace TeachMeSkills.BusinessLogicLayer.Managers
             return todoDtos;
         }
 
+        public async Task UpdateAsync(TodoDto todoDto)
+        {
+            var todo = await _repositoryTodo.GetEntityAsync(todo => todo.Id == todoDto.Id && todo.UserId == todoDto.UserId);
+
+            static bool ValidateToUpdate(Todo todo, TodoDto todoDto)
+            {
+                bool updated = false;
+
+                if (todo.Title != todoDto.Title)
+                {
+                    todo.Title = todoDto.Title;
+                    updated = true;
+                }
+
+                if (todo.Description != todoDto.Description)
+                {
+                    todo.Description = todoDto.Description;
+                    updated = true;
+                }
+
+                if (todo.PriorityType != todoDto.PriorityType)
+                {
+                    todo.PriorityType = todoDto.PriorityType;
+                    updated = true;
+                }
+
+                return updated;
+            }
+
+            var result = ValidateToUpdate(todo, todoDto);
+            if (result)
+            {
+                await _repositoryTodo.SaveChangesAsync();
+            }
+        }
+
         public async Task DeleteAsync(int id, string userId)
         {
             var todo = await _repositoryTodo.GetEntityAsync(todo => todo.Id == id && todo.UserId == userId);

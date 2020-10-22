@@ -43,5 +43,11 @@ namespace TeachMeSkills.BusinessLogicLayer.Interfaces
         /// <param name="id">Identifier.</param>
         /// <param name="userId">User identifier.</param>
         Task ChangeTodoStatusAsync(int id, string userId);
+
+        /// <summary>
+        /// Update todo by identifier.
+        /// </summary>
+        /// <param name="todoDto">Todo data transfer object.</param>
+        Task UpdateAsync(TodoDto todoDto);
     }
 }
