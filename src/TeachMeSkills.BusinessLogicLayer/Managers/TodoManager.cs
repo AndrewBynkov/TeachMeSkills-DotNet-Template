@@ -27,7 +27,7 @@ namespace TeachMeSkills.BusinessLogicLayer.Managers
                 Title = todoDto.Title,
                 Description = todoDto.Description,
                 PriorityType = todoDto.PriorityType,
-                IsActive = true,
+                Completed = false,
                 Created = DateTime.Now,
             };
 
@@ -50,7 +50,7 @@ namespace TeachMeSkills.BusinessLogicLayer.Managers
                 Title = todo.Title,
                 Description = todo.Description,
                 PriorityType = todo.PriorityType,
-                IsActive = todo.IsActive,
+                IsActive = todo.Completed,
                 Created = todo.Created,
                 Closed = todo.Closed
             };
@@ -81,7 +81,7 @@ namespace TeachMeSkills.BusinessLogicLayer.Managers
                     Title = todo.Title,
                     Description = todo.Description,
                     PriorityType = todo.PriorityType,
-                    IsActive = todo.IsActive,
+                    IsActive = todo.Completed,
                     Created = todo.Created,
                     Closed = todo.Closed
                 });
@@ -146,7 +146,7 @@ namespace TeachMeSkills.BusinessLogicLayer.Managers
                 return;
             }
 
-            todo.IsActive = false;
+            todo.Completed = true;
             todo.Closed = DateTime.Now;
 
             _repositoryTodo.Update(todo);

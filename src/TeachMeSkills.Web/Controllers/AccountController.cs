@@ -11,8 +11,9 @@ using TeachMeSkills.DataAccessLayer.Entities;
 using TeachMeSkills.Web.ViewModels;
 
 // TODO:
-
-// email sender
+// refactoring code
+// check exceptions
+// client validation
 
 namespace TeachMeSkills.Web.Controllers
 {

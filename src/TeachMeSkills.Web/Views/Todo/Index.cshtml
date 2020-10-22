@@ -15,7 +15,7 @@
     foreach (var todo in Model)
     {
         //TODO: refactor it
-        if (todo.IsActive)
+        if (!todo.IsActive)
         {
             <div class="todo todo__indent-bottom @todo.Priority" title="@todo.Description">
                 <div class="todo__wrapper">

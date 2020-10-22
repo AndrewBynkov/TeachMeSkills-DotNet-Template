@@ -38,7 +38,7 @@ namespace TeachMeSkills.DataAccessLayer.Entities
         /// <summary>
         /// IsActive.
         /// </summary>
-        public bool IsActive { get; set; } // TODO: rename it to Status
+        public bool Completed { get; set; }
 
         /// <summary>
         /// Created.

@@ -7,6 +7,9 @@ namespace TeachMeSkills.DataAccessLayer.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.EnsureSchema(
+                name: "todo");
+
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
@@ -152,6 +155,32 @@ namespace TeachMeSkills.DataAccessLayer.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Todos",
+                schema: "todo",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<string>(nullable: true),
+                    Title = table.Column<string>(maxLength: 127, nullable: false),
+                    Description = table.Column<string>(maxLength: 255, nullable: true),
+                    PriorityType = table.Column<int>(nullable: false),
+                    Completed = table.Column<bool>(nullable: false),
+                    Created = table.Column<DateTime>(nullable: false),
+                    Closed = table.Column<DateTime>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Todos", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Todos_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -190,6 +219,12 @@ namespace TeachMeSkills.DataAccessLayer.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Todos_UserId",
+                schema: "todo",
+                table: "Todos",
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -208,6 +243,10 @@ namespace TeachMeSkills.DataAccessLayer.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "Todos",
+                schema: "todo");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

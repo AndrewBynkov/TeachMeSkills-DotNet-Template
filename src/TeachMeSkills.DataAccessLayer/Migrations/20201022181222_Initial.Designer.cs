@@ -10,7 +10,7 @@ using TeachMeSkills.DataAccessLayer.Contexts;
 namespace TeachMeSkills.DataAccessLayer.Migrations
 {
     [DbContext(typeof(TeachMeSkillsContext))]
-    [Migration("20201005164725_Initial")]
+    [Migration("20201022181222_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -152,6 +152,44 @@ namespace TeachMeSkills.DataAccessLayer.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("TeachMeSkills.DataAccessLayer.Entities.Todo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime?>("Closed")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("Completed")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(255)")
+                        .HasMaxLength(255);
+
+                    b.Property<int>("PriorityType")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(127)")
+                        .HasMaxLength(127);
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Todos","todo");
+                });
+
             modelBuilder.Entity("TeachMeSkills.DataAccessLayer.Entities.User", b =>
                 {
                     b.Property<string>("Id")
@@ -266,6 +304,14 @@ namespace TeachMeSkills.DataAccessLayer.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("TeachMeSkills.DataAccessLayer.Entities.Todo", b =>
+                {
+                    b.HasOne("TeachMeSkills.DataAccessLayer.Entities.User", "User")
+                        .WithMany("Todos")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 #pragma warning restore 612, 618
         }

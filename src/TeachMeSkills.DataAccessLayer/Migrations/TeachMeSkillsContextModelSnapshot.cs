@@ -160,15 +160,15 @@ namespace TeachMeSkills.DataAccessLayer.Migrations
                     b.Property<DateTime?>("Closed")
                         .HasColumnType("datetime2");
 
+                    b.Property<bool>("Completed")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(255)")
                         .HasMaxLength(255);
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
 
                     b.Property<int>("PriorityType")
                         .HasColumnType("int");
