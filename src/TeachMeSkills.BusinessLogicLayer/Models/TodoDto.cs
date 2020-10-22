@@ -4,7 +4,7 @@ using TeachMeSkills.Common.Enums;
 namespace TeachMeSkills.BusinessLogicLayer.Models
 {
     /// <summary>
-    ///  Todo data transfer object.
+    /// Data transfer object (Todo).
     /// </summary>
     public class TodoDto
     {

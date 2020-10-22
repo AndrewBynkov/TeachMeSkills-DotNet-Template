@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using TeachMeSkills.Common.Constants;
 
 namespace TeachMeSkills.Web.ViewModels
 {
@@ -22,11 +23,10 @@ namespace TeachMeSkills.Web.ViewModels
         [Display(Name = nameof(Password))]
         public string Password { get; set; }
 
-        // TODO: replace to constants
         /// <summary>
         /// Remember me.
         /// </summary>
-        [Display(Name = "Remember me?")]
+        [Display(Name = DataAnnotationConstant.DispayRememberMe)]
         public bool RememberMe { get; set; }
 
         /// <summary>

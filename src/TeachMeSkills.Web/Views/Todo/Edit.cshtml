@@ -1,7 +1,7 @@
 ﻿@model TodoActionViewModel
 
 @{
-    ViewData["Title"] = "Edit todo page";
+    ViewData["Title"] = string.Format(PageTitleResource.StringFormat, PageTitleResource.TodoEdit, PageTitleResource.SiteName);
 }
 
 <h1 class="indent__margin-bottom">Edit todo</h1>

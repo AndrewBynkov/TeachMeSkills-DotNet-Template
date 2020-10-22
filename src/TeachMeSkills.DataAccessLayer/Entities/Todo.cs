@@ -5,7 +5,7 @@ using TeachMeSkills.DataAccessLayer.Interfaces;
 namespace TeachMeSkills.DataAccessLayer.Entities
 {
     /// <summary>
-    /// Todo.
+    /// Entity Todo.
     /// </summary>
     public class Todo : IHasDbIdentity, IHasUserIdentity
     {

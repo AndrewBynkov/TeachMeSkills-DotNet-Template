@@ -4,7 +4,7 @@ using TeachMeSkills.Common.Constants;
 namespace TeachMeSkills.Web.ViewModels
 {
     /// <summary>
-    /// Todo action ViewModel.
+    /// Action ViewModel.
     /// </summary>
     public class TodoActionViewModel
     {

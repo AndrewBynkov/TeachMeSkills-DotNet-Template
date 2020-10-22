@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<TodoViewModel>
 
 @{
-    ViewData["Title"] = "Todos";
+    ViewData["Title"] = string.Format(PageTitleResource.StringFormat, PageTitleResource.TodoIndex, PageTitleResource.SiteName);
 }
 
 <div class="indent__margin-bottom">
@@ -22,7 +22,6 @@
                     <a class="todo__text @todo.Priority" asp-controller="Todo" asp-action="Detail" asp-route-id="@todo.Id">
                         <span>@todo.Title</span>
                     </a>
-                    @*<span class="todo__text @todo.Priority">@todo.Title</span>*@
                     <a class="todo__progress" asp-controller="Todo" asp-action="Complete" asp-route-id="@todo.Id">
                         <img src="/images/in-progress.svg" alt="In progress">
                     </a>
@@ -36,7 +35,6 @@
                     <a class="todo__text todo__text-completed" asp-controller="Todo" asp-action="Detail" asp-route-id="@todo.Id">
                         <span>@todo.Title</span>
                     </a>
-@*                    <span class="todo__text todo__text-completed">@todo.Title</span>*@
                     <a class="todo__progress" asp-controller="Todo" asp-action="Delete" asp-route-id="@todo.Id">
                         <img src="/images/completed.svg" alt="Completed">
                     </a>

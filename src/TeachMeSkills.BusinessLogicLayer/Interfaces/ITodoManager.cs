@@ -5,7 +5,7 @@ using TeachMeSkills.BusinessLogicLayer.Models;
 namespace TeachMeSkills.BusinessLogicLayer.Interfaces
 {
     /// <summary>
-    /// Todo manager.
+    /// Manager Todo.
     /// </summary>
     public interface ITodoManager
     {

@@ -5,13 +5,12 @@ using System;
 using System.Threading.Tasks;
 using TeachMeSkills.BusinessLogicLayer.Interfaces;
 using TeachMeSkills.BusinessLogicLayer.Models;
+using TeachMeSkills.Common.Resources;
 using TeachMeSkills.DataAccessLayer.Entities;
 using TeachMeSkills.Web.ViewModels;
 
 // TODO:
-// any method (update)
 
-//titles
 //share todo
 // email sender
 
@@ -103,7 +102,7 @@ namespace TeachMeSkills.Web.Controllers
                     return RedirectToAction("Index", "Home");
                 }
 
-                ModelState.AddModelError(string.Empty, "Incorrect email and (or) password");
+                ModelState.AddModelError(string.Empty, AccountResource.IncorrectData);
             }
             return View(model);
         }
