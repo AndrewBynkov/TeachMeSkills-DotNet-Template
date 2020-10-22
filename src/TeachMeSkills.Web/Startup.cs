@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NETCore.MailKit.Extensions;
 using NETCore.MailKit.Infrastructure.Internal;
+using Serilog;
 using System;
 using TeachMeSkills.BusinessLogicLayer.Interfaces;
 using TeachMeSkills.BusinessLogicLayer.Managers;
@@ -70,6 +71,8 @@ namespace TeachMeSkills.Web
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseDeveloperExceptionPage();
+
+            app.UseSerilogRequestLogging();
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
