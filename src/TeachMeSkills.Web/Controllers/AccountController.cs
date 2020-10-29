@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using NETCore.MailKit.Core;
 using System;
@@ -30,12 +29,6 @@ namespace TeachMeSkills.Web.Controllers
             _accountManger = accountManger ?? throw new ArgumentNullException(nameof(accountManger));
             _signInManager = signInManager ?? throw new ArgumentNullException(nameof(signInManager));
             _emailService = emailService ?? throw new ArgumentNullException(nameof(emailService));
-        }
-
-        [Authorize]
-        public IActionResult Secret(int id, [FromQuery] string query, [FromBody] SecretViewModel secret, [FromHeader] string secretValue)
-        {
-            return Content($"Route: {id}, Query: {query}, Body: {secret.Key}, Header: {secretValue}");
         }
 
         [HttpGet]
