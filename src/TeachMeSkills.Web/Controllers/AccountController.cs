@@ -12,7 +12,9 @@ using TeachMeSkills.Web.ViewModels;
 // TODO:
 // refactoring code
 // check exceptions
-// client validation
+// global error hander
+// WebApi
+// code analyzer
 
 namespace TeachMeSkills.Web.Controllers
 {
@@ -60,7 +62,7 @@ namespace TeachMeSkills.Web.Controllers
 
                     await _signInManager.SignInAsync(user, false);
 
-                    _emailService.Send(model.Email, "ToDo App", "Welcome to ToDo App!");
+                    _emailService.Send(model.Email, EmailResource.Subject, EmailResource.Message);
 
                     return RedirectToAction("Index", "Home");
                 }

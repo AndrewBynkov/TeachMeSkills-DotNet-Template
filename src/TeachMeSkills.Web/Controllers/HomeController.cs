@@ -11,7 +11,7 @@ namespace TeachMeSkills.Web.Controllers
 
         public HomeController(IMemoryCache memoryCache)
         {
-            _memoryCache = memoryCache ?? throw new System.ArgumentNullException(nameof(memoryCache));
+            _memoryCache = memoryCache ?? throw new ArgumentNullException(nameof(memoryCache));
         }
 
         [ResponseCache(Location = ResponseCacheLocation.Any, Duration = 300)]

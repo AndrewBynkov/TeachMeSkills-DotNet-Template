@@ -4,8 +4,8 @@
     ViewData["Title"] = string.Format(PageTitleResource.StringFormat, PageTitleResource.TodoDetail, PageTitleResource.SiteName);
 
     var closedDate = @Model.Closed.HasValue
-? @Model.Closed.ToString()
-: "-";
+        ? @Model.Closed.ToString()
+        : "-";
 }
 
 @if (!Model.Closed.HasValue)
