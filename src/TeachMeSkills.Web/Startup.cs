@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -28,7 +28,7 @@ namespace TeachMeSkills.Web
         public void ConfigureServices(IServiceCollection services)
         {
             // Repository pattern (Generic)
-            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddScoped(typeof(IRepositoryManager<>), typeof(RepositoryManager<>));
 
             // Managers
             services.AddScoped<IAccountManager, AccountManager>();
@@ -69,7 +69,7 @@ namespace TeachMeSkills.Web
             });
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app)
         {
             app.UseDeveloperExceptionPage();
 

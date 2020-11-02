@@ -3,7 +3,7 @@
     /// <summary>
     /// DataAnnotation constants
     /// </summary>
-    public class DataAnnotationConstant
+    public static class DataAnnotationConstant
     {
         /// <summary>
         /// DataAnnotation for display RememberMe.

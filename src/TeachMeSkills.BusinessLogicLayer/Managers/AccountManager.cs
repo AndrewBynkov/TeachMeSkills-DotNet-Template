@@ -20,6 +20,8 @@ namespace TeachMeSkills.BusinessLogicLayer.Managers
 
         public async Task<IdentityResult> SignUpAsync(UserDto userDto)
         {
+            userDto = userDto ?? throw new ArgumentNullException(nameof(userDto));
+
             var user = new User
             {
                 Email = userDto.Email,

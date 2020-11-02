@@ -12,15 +12,17 @@ namespace TeachMeSkills.BusinessLogicLayer.Managers
     /// <inheritdoc cref="ITodoManager"/>
     public class TodoManager : ITodoManager
     {
-        private readonly IRepository<Todo> _repositoryTodo;
+        private readonly IRepositoryManager<Todo> _repositoryTodo;
 
-        public TodoManager(IRepository<Todo> repositoryTodo)
+        public TodoManager(IRepositoryManager<Todo> repositoryTodo)
         {
             _repositoryTodo = repositoryTodo ?? throw new ArgumentNullException(nameof(repositoryTodo));
         }
 
         public async Task CreateAsync(TodoDto todoDto)
         {
+            todoDto = todoDto ?? throw new ArgumentNullException(nameof(todoDto));
+
             var todo = new Todo
             {
                 UserId = todoDto.UserId,
@@ -92,35 +94,36 @@ namespace TeachMeSkills.BusinessLogicLayer.Managers
 
         public async Task UpdateAsync(TodoDto todoDto)
         {
+            todoDto = todoDto ?? throw new ArgumentNullException(nameof(todoDto));
+
             var todo = await _repositoryTodo.GetEntityAsync(todo => todo.Id == todoDto.Id && todo.UserId == todoDto.UserId);
 
-            static bool ValidateToUpdate(Todo todo, TodoDto todoDto)
+            static bool CheckAndUpdate(Todo todo, TodoDto newTodo)
             {
-                bool updated = false;
+                var toUpdate = false;
 
-                if (todo.Title != todoDto.Title)
+                if (todo.Title != newTodo.Title)
                 {
-                    todo.Title = todoDto.Title;
-                    updated = true;
+                    todo.Title = newTodo.Title;
+                    toUpdate = true;
                 }
 
-                if (todo.Description != todoDto.Description)
+                if (todo.Description != newTodo.Description)
                 {
-                    todo.Description = todoDto.Description;
-                    updated = true;
+                    todo.Description = newTodo.Description;
+                    toUpdate = true;
                 }
 
-                if (todo.PriorityType != todoDto.PriorityType)
+                if (todo.PriorityType != newTodo.PriorityType)
                 {
-                    todo.PriorityType = todoDto.PriorityType;
-                    updated = true;
+                    todo.PriorityType = newTodo.PriorityType;
+                    toUpdate = true;
                 }
 
-                return updated;
+                return toUpdate;
             }
 
-            var result = ValidateToUpdate(todo, todoDto);
-            if (result)
+            if (CheckAndUpdate(todo, todoDto))
             {
                 await _repositoryTodo.SaveChangesAsync();
             }

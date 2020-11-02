@@ -3,7 +3,7 @@
     /// <summary>
     /// Table constants.
     /// </summary>
-    public class TableConstants
+    public static class TableConstants
     {
         /// <summary>
         /// Todos.

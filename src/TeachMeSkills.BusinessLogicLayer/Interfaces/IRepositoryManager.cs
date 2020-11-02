@@ -10,7 +10,7 @@ namespace TeachMeSkills.BusinessLogicLayer.Interfaces
     /// Generic repository provide all base needed methods (CRUD).
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public interface IRepository<T> where T : class
+    public interface IRepositoryManager<T> where T : class
     {
         /// <summary>
         /// Create new entity async.

@@ -10,12 +10,12 @@ using TeachMeSkills.DataAccessLayer.Contexts;
 namespace TeachMeSkills.BusinessLogicLayer.Repository
 {
     /// <inheritdoc cref="IRepository<T>"/>
-    public class Repository<T> : IRepository<T> where T : class
+    public class RepositoryManager<T> : IRepositoryManager<T> where T : class
     {
         private readonly DbSet<T> _dbSet;
         private readonly DbContext _context;
 
-        public Repository(TeachMeSkillsContext context)
+        public RepositoryManager(TeachMeSkillsContext context)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
             _dbSet = context.Set<T>();

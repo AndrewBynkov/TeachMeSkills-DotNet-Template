@@ -3,7 +3,7 @@
     /// <summary>
     /// Schema constants.
     /// </summary>
-    public class SchemaConstants
+    public static class SchemaConstants
     {
         /// <summary>
         /// Account.

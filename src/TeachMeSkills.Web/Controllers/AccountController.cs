@@ -13,8 +13,9 @@ using TeachMeSkills.Web.ViewModels;
 // refactoring code
 // check exceptions
 // global error hander
+// use notfound and other
+// use AutoMapper
 // WebApi
-// code analyzer
 
 namespace TeachMeSkills.Web.Controllers
 {
@@ -42,6 +43,8 @@ namespace TeachMeSkills.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
+            model = model ?? throw new ArgumentNullException(nameof(model));
+
             if (ModelState.IsValid)
             {
                 var userDto = new UserDto
@@ -91,6 +94,8 @@ namespace TeachMeSkills.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
+            model = model ?? throw new ArgumentNullException(nameof(model));
+
             if (ModelState.IsValid)
             {
                 var result = await _signInManager.PasswordSignInAsync(model.Username, model.Password, model.RememberMe, false);

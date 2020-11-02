@@ -60,6 +60,8 @@ namespace TeachMeSkills.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(TodoActionViewModel model)
         {
+            model = model ?? throw new ArgumentNullException(nameof(model));
+
             if (ModelState.IsValid)
             {
                 var userId = await _accountManager.GetUserIdByNameAsync(User.Identity.Name);
@@ -121,6 +123,8 @@ namespace TeachMeSkills.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(TodoActionViewModel model)
         {
+            model = model ?? throw new ArgumentNullException(nameof(model));
+
             if (ModelState.IsValid)
             {
                 var userId = await _accountManager.GetUserIdByNameAsync(User.Identity.Name);

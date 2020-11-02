@@ -17,6 +17,8 @@ namespace TeachMeSkills.Web.Controllers
         [ResponseCache(Location = ResponseCacheLocation.Any, Duration = 300)]
         public IActionResult Secret(int id, [FromQuery] string query, [FromBody] SecretViewModel secret, [FromHeader] string secretValue)
         {
+            secret = secret ?? throw new ArgumentNullException(nameof(secret));
+
             if (!_memoryCache.TryGetValue(id, out string str))
             {
                 str = $"Route: {id}, Query: {query}, Body: {secret.Key}, Header: {secretValue}";
