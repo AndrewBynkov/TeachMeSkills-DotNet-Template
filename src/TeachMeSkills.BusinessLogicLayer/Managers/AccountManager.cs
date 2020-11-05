@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using TeachMeSkills.BusinessLogicLayer.Interfaces;
+using TeachMeSkills.Common.Resources;
 using TeachMeSkills.DataAccessLayer.Entities;
 
 namespace TeachMeSkills.BusinessLogicLayer.Managers
@@ -20,10 +21,10 @@ namespace TeachMeSkills.BusinessLogicLayer.Managers
 
         public async Task<string> GetUserIdByNameAsync(string name)
         {
-            var user = await _userManager.Users.FirstAsync(u => u.UserName == name);
+            var user = await _userManager.Users.FirstAsync(user => user.UserName == name);
             if (user is null)
             {
-                throw new KeyNotFoundException(""); // TODO: literal
+                throw new KeyNotFoundException(ErrorResource.UserNotFound);
             }
 
             return user.Id;

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using TeachMeSkills.BusinessLogicLayer.Interfaces;
 using TeachMeSkills.BusinessLogicLayer.Models;
+using TeachMeSkills.Common.Resources;
 using TeachMeSkills.DataAccessLayer.Entities;
 
 namespace TeachMeSkills.BusinessLogicLayer.Managers
@@ -39,10 +40,13 @@ namespace TeachMeSkills.BusinessLogicLayer.Managers
 
         public async Task<TodoDto> GetTodoAsync(int id, string userId)
         {
-            var todo = await _repositoryTodo.GetEntityWithoutTrackingAsync(todo => todo.Id == id && todo.UserId == userId);
+            var todo = await _repositoryTodo
+                .GetEntityWithoutTrackingAsync(todo =>
+                    todo.Id == id && todo.UserId == userId);
+
             if (todo is null)
             {
-                return new TodoDto(); // TODO: to global exception
+                throw new KeyNotFoundException(ErrorResource.TodoNotFound);
             }
 
             var todoDto = new TodoDto
@@ -71,7 +75,7 @@ namespace TeachMeSkills.BusinessLogicLayer.Managers
 
             if (!todos.Any())
             {
-                return todoDtos; // TODO: to global exception
+                throw new KeyNotFoundException(ErrorResource.TodosNotFound);
             }
 
             foreach (var todo in todos)
@@ -96,8 +100,14 @@ namespace TeachMeSkills.BusinessLogicLayer.Managers
         {
             todoDto = todoDto ?? throw new ArgumentNullException(nameof(todoDto));
 
-            var todo = await _repositoryTodo.GetEntityAsync(todo => todo.Id == todoDto.Id && todo.UserId == todoDto.UserId);
-            // TODO: to global exception
+            var todo = await _repositoryTodo
+                .GetEntityAsync(todo =>
+                    todo.Id == todoDto.Id && todo.UserId == todoDto.UserId);
+
+            if (todo is null)
+            {
+                throw new KeyNotFoundException(ErrorResource.TodoNotFound);
+            }
 
             static bool CheckAndUpdate(Todo todo, TodoDto newTodo)
             {
@@ -132,10 +142,13 @@ namespace TeachMeSkills.BusinessLogicLayer.Managers
 
         public async Task DeleteAsync(int id, string userId)
         {
-            var todo = await _repositoryTodo.GetEntityAsync(todo => todo.Id == id && todo.UserId == userId);
+            var todo = await _repositoryTodo
+                .GetEntityAsync(todo =>
+                    todo.Id == id && todo.UserId == userId);
+
             if (todo is null)
             {
-                return; // TODO: to global exception
+                throw new KeyNotFoundException(ErrorResource.TodoNotFound);
             }
 
             _repositoryTodo.Delete(todo);
@@ -144,10 +157,13 @@ namespace TeachMeSkills.BusinessLogicLayer.Managers
 
         public async Task ChangeTodoStatusAsync(int id, string userId)
         {
-            var todo = await _repositoryTodo.GetEntityAsync(todo => todo.Id == id && todo.UserId == userId);
+            var todo = await _repositoryTodo
+                .GetEntityAsync(todo =>
+                    todo.Id == id && todo.UserId == userId);
+
             if (todo is null)
             {
-                return; // TODO: to global exception
+                throw new KeyNotFoundException(ErrorResource.TodoNotFound);
             }
 
             todo.Completed = true;

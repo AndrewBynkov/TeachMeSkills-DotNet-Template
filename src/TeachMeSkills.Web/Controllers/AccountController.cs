@@ -12,9 +12,6 @@ using TeachMeSkills.Web.ViewModels;
 // TODO:
 // refactoring code
 // check exceptions
-// global error hander
-// global view render for exception
-// use notfound and other
 // use AutoMapper
 // WebApi
 

@@ -13,6 +13,7 @@ using TeachMeSkills.BusinessLogicLayer.Managers;
 using TeachMeSkills.BusinessLogicLayer.Repository;
 using TeachMeSkills.DataAccessLayer.Contexts;
 using TeachMeSkills.DataAccessLayer.Entities;
+using TeachMeSkills.Web.Extensions;
 
 namespace TeachMeSkills.Web
 {
@@ -71,8 +72,7 @@ namespace TeachMeSkills.Web
 
         public void Configure(IApplicationBuilder app)
         {
-            // TODO: delete it
-            app.UseDeveloperExceptionPage();
+            //app.UseDeveloperExceptionPage();
 
             app.UseSerilogRequestLogging();
 
@@ -83,6 +83,8 @@ namespace TeachMeSkills.Web
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseMiddleware<ErrorHandlerMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {
