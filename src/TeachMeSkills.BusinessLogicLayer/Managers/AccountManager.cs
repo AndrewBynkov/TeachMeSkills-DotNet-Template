@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using TeachMeSkills.BusinessLogicLayer.Interfaces;
-using TeachMeSkills.BusinessLogicLayer.Models;
 using TeachMeSkills.DataAccessLayer.Entities;
 
 namespace TeachMeSkills.BusinessLogicLayer.Managers
@@ -18,22 +18,14 @@ namespace TeachMeSkills.BusinessLogicLayer.Managers
             _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
         }
 
-        public async Task<IdentityResult> SignUpAsync(UserDto userDto)
-        {
-            userDto = userDto ?? throw new ArgumentNullException(nameof(userDto));
-
-            var user = new User
-            {
-                Email = userDto.Email,
-                UserName = userDto.Username,
-            };
-
-            return await _userManager.CreateAsync(user, userDto.Password);
-        }
-
         public async Task<string> GetUserIdByNameAsync(string name)
         {
             var user = await _userManager.Users.FirstAsync(u => u.UserName == name);
+            if (user is null)
+            {
+                throw new KeyNotFoundException(""); // TODO: literal
+            }
+
             return user.Id;
         }
     }

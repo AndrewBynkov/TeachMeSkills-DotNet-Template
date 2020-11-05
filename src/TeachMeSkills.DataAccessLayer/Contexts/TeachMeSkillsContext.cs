@@ -25,13 +25,13 @@ namespace TeachMeSkills.DataAccessLayer.Contexts
         /// </summary>
         public DbSet<Todo> Todos { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        protected override void OnModelCreating(ModelBuilder builder)
         {
-            modelBuilder = modelBuilder ?? throw new ArgumentNullException(nameof(modelBuilder));
+            builder = builder ?? throw new ArgumentNullException(nameof(builder));
 
-            modelBuilder.ApplyConfiguration(new TodoConfiguration());
+            builder.ApplyConfiguration(new TodoConfiguration());
 
-            base.OnModelCreating(modelBuilder);
+            base.OnModelCreating(builder);
         }
     }
 }

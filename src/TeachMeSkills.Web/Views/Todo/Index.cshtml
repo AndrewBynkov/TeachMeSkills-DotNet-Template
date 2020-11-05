@@ -12,35 +12,34 @@
 
 @if (Model.Any())
 {
-    foreach (var todo in Model)
+    foreach (var todoModel in Model)
     {
-        //TODO: refactor it
-        if (!todo.IsActive)
-        {
-            <div class="todo todo__indent-bottom @todo.Priority" title="@todo.Description">
-                <div class="todo__wrapper">
-                    <a class="todo__text @todo.Priority" asp-controller="Todo" asp-action="Detail" asp-route-id="@todo.Id">
-                        <span>@todo.Title</span>
-                    </a>
-                    <a class="todo__progress" asp-controller="Todo" asp-action="Complete" asp-route-id="@todo.Id">
-                        <img src="/images/in-progress.svg" alt="In progress">
-                    </a>
-                </div>
+        var todoMainClass = !todoModel.IsActive
+            ? $"todo todo__indent-bottom {todoModel.Priority}"
+            : "todo todo__indent-bottom todo__task-completed";
+
+        var todoText = !todoModel.IsActive
+            ? $"todo__text {todoModel.Priority}"
+            : "todo__text todo__text-completed";
+
+        var todoAction = !todoModel.IsActive
+            ? "Complete"
+            : "Delete";
+
+        var (todoImage, todoAlt) = !todoModel.IsActive
+            ? ("in-progress.svg", "In progress")
+            : ("completed.svg", "Completed");
+
+        <div class="@todoMainClass" title="@todoModel.Description">
+            <div class="todo__wrapper">
+                <a class="@todoText" asp-controller="Todo" asp-action="Detail" asp-route-id="@todoModel.Id">
+                    <span>@todoModel.Title</span>
+                </a>
+                <a class="todo__progress" asp-controller="Todo" asp-action="@todoAction" asp-route-id="@todoModel.Id">
+                    <img src="/images/@todoImage" alt="@todoAlt">
+                </a>
             </div>
-        }
-        else
-        {
-            <div class="todo todo__indent-bottom todo__task-completed" title="@todo.Description">
-                <div class="todo__wrapper">
-                    <a class="todo__text todo__text-completed" asp-controller="Todo" asp-action="Detail" asp-route-id="@todo.Id">
-                        <span>@todo.Title</span>
-                    </a>
-                    <a class="todo__progress" asp-controller="Todo" asp-action="Delete" asp-route-id="@todo.Id">
-                        <img src="/images/completed.svg" alt="Completed">
-                    </a>
-                </div>
-            </div>
-        }
+        </div>
     }
 }
 else

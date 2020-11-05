@@ -13,6 +13,7 @@ using TeachMeSkills.Web.ViewModels;
 // refactoring code
 // check exceptions
 // global error hander
+// global view render for exception
 // use notfound and other
 // use AutoMapper
 // WebApi
@@ -21,16 +22,17 @@ namespace TeachMeSkills.Web.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly IAccountManager _accountManger;
         private readonly SignInManager<User> _signInManager;
+        private readonly UserManager<User> _userManager;
         private readonly IEmailService _emailService;
 
-        public AccountController(IAccountManager accountManger,
-                                 SignInManager<User> signInManager,
-                                 IEmailService emailService)
+        public AccountController(
+            SignInManager<User> signInManager,
+            UserManager<User> userManager,
+            IEmailService emailService)
         {
-            _accountManger = accountManger ?? throw new ArgumentNullException(nameof(accountManger));
             _signInManager = signInManager ?? throw new ArgumentNullException(nameof(signInManager));
+            _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
             _emailService = emailService ?? throw new ArgumentNullException(nameof(emailService));
         }
 
@@ -47,22 +49,15 @@ namespace TeachMeSkills.Web.Controllers
 
             if (ModelState.IsValid)
             {
-                var userDto = new UserDto
+                var user = new User
                 {
                     Email = model.Email,
-                    Username = model.Username,
-                    Password = model.Password
+                    UserName = model.Username,
                 };
 
-                var result = await _accountManger.SignUpAsync(userDto);
+                var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    var user = new User
-                    {
-                        Email = model.Email,
-                        UserName = model.Username,
-                    };
-
                     await _signInManager.SignInAsync(user, false);
 
                     _emailService.Send(model.Email, EmailResource.Subject, EmailResource.Message);

@@ -71,6 +71,7 @@ namespace TeachMeSkills.Web
 
         public void Configure(IApplicationBuilder app)
         {
+            // TODO: delete it
             app.UseDeveloperExceptionPage();
 
             app.UseSerilogRequestLogging();

@@ -42,7 +42,7 @@ namespace TeachMeSkills.BusinessLogicLayer.Managers
             var todo = await _repositoryTodo.GetEntityWithoutTrackingAsync(todo => todo.Id == id && todo.UserId == userId);
             if (todo is null)
             {
-                return new TodoDto();
+                return new TodoDto(); // TODO: to global exception
             }
 
             var todoDto = new TodoDto
@@ -71,7 +71,7 @@ namespace TeachMeSkills.BusinessLogicLayer.Managers
 
             if (!todos.Any())
             {
-                return todoDtos;
+                return todoDtos; // TODO: to global exception
             }
 
             foreach (var todo in todos)
@@ -97,6 +97,7 @@ namespace TeachMeSkills.BusinessLogicLayer.Managers
             todoDto = todoDto ?? throw new ArgumentNullException(nameof(todoDto));
 
             var todo = await _repositoryTodo.GetEntityAsync(todo => todo.Id == todoDto.Id && todo.UserId == todoDto.UserId);
+            // TODO: to global exception
 
             static bool CheckAndUpdate(Todo todo, TodoDto newTodo)
             {
@@ -134,7 +135,7 @@ namespace TeachMeSkills.BusinessLogicLayer.Managers
             var todo = await _repositoryTodo.GetEntityAsync(todo => todo.Id == id && todo.UserId == userId);
             if (todo is null)
             {
-                return;
+                return; // TODO: to global exception
             }
 
             _repositoryTodo.Delete(todo);
@@ -146,7 +147,7 @@ namespace TeachMeSkills.BusinessLogicLayer.Managers
             var todo = await _repositoryTodo.GetEntityAsync(todo => todo.Id == id && todo.UserId == userId);
             if (todo is null)
             {
-                return;
+                return; // TODO: to global exception
             }
 
             todo.Completed = true;
