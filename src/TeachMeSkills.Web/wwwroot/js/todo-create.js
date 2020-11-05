@@ -9,7 +9,7 @@ function showAlert() {
         return;
     }
 
-    alert(`Your new todo item:\nTitle: ${title}!\nDescription: ${description}`);
+    alert(`Your new todo item:\nTitle: ${title}\nDescription: ${description}`);
 }
 
 function run() {

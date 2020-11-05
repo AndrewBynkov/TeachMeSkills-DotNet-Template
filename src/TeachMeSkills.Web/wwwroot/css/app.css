@@ -7,7 +7,7 @@
 }
 
 body {
-    background: #F2F5F7;
+    background: linear-gradient(315deg, #F4F7FF 0%, #F7F8FB 100%);
 }
 
 header {
@@ -15,7 +15,7 @@ header {
 }
 
 h1 {
-    color: #242e4C;
+    color: #252A31;
 }
 
 .wrapper {
@@ -43,11 +43,11 @@ header {
     font-weight: bold;
     font-size: 20px;
     line-height: 27px;
-    color: #242e4c;
+    color: #252A31;
 }
 
     .logo:hover {
-        color: #2e5e87;
+        color: #51555a;
     }
 
 .logo__link {
@@ -66,7 +66,7 @@ header {
     font-weight: 500;
     font-size: 16px;
     line-height: 20px;
-    color: #242e4c;
+    color: #252A31;
 }
 
 .link {
@@ -74,7 +74,7 @@ header {
     font-weight: 500;
     font-size: 16px;
     line-height: 20px;
-    color: #152f46;
+    color: #252A31;
     text-decoration: none;
 }
 
@@ -85,7 +85,7 @@ header {
 .button {
     cursor: pointer;
     padding: 6px 16px;
-    background: #152f46;
+    background: #006CFF;
     border-radius: 3px;
     border: none;
     font-style: normal;
@@ -98,27 +98,19 @@ header {
 }
 
     .button:hover {
-        background: #2e5e87;
+        background: #559dff;
     }
 
 .button__link {
     text-decoration: none;
 }
 
-.button__orange {
-    background: #ffcf86;
+.button__edit {
+    background: #F45E6D;
 }
 
-    .button__orange:hover {
-        background: #fedea6;
-    }
-
-.button__red {
-    background: #fa6e5a;
-}
-
-    .button__red:hover {
-        background: #f05d48;
+    .button__edit:hover {
+        background: #f56e7c;
     }
 
 .input {
@@ -140,6 +132,44 @@ header {
 .indent__margin-top {
     margin-top: 8px;
 }
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+    .tooltip .tooltiptext {
+        visibility: hidden;
+        width: 120px;
+        background-color: #FFE761;
+        color: #fff;
+        text-align: center;
+        border-radius: 6px;
+        padding: 5px 0;
+        position: absolute;
+        z-index: 1;
+        bottom: 125%;
+        left: 50%;
+        margin-left: -60px;
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+
+        .tooltip .tooltiptext::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #FFE761 transparent transparent transparent;
+        }
+
+    .tooltip:hover .tooltiptext {
+        visibility: visible;
+        opacity: 1;
+    }
 
 @media screen and (max-width: 1020px) {
     .wrapper {

@@ -2,7 +2,7 @@
     padding: 20px 20px;
     background: #FFFFFF;
     border-radius: 5px;
-    cursor: help;
+    border-top: 10px solid #EBEFF5;
 }
 
 .todo__indent-bottom {
@@ -20,18 +20,21 @@
     font-weight: bold;
     font-size: 16px;
     line-height: 20px;
-    color: #242e4c;
+    color: #252A31;
     text-decoration: none;
 }
 
+.todo__text-completed {
+    color: #a2b6c2;
+    text-decoration: line-through;
+}
+
 .todo__medium {
-    background: #8e97fd;
-    color: #ffffff;
+    border-top: 10px solid #FFE761;
 }
 
 .todo__high {
-    background: #fa6e5a;
-    color: #ffffff;
+    border-top: 10px solid #F45E6D;
 }
 
 .todo__image {
@@ -40,19 +43,14 @@
 
 .todo__progress {
     cursor: pointer;
-    height: 30px;
+    height: 32px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .todo__task-completed {
-    background: none;
-}
-
-.todo__text-completed {
-    color: #a2b6c2;
-    text-decoration: line-through;
+    border-top: 10px solid #61DEA4;
 }
 
 .todo__detail {
@@ -60,5 +58,21 @@
     font-weight: 500;
     font-size: 28px;
     line-height: 42px;
-    color: #242e4c;
+    color: #252A31;
+}
+
+.todo__actions {
+    width: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.todo__description {
+    display: flex;
+    align-items: center;
+}
+
+.todo__status {
+    height: 28px;
 }

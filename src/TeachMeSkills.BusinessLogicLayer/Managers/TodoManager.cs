@@ -75,7 +75,7 @@ namespace TeachMeSkills.BusinessLogicLayer.Managers
 
             if (!todos.Any())
             {
-                throw new KeyNotFoundException(ErrorResource.TodosNotFound);
+                return todoDtos;
             }
 
             foreach (var todo in todos)

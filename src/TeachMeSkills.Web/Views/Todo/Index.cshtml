@@ -6,7 +6,7 @@
 
 <div class="indent__margin-bottom">
     <a asp-controller="Todo" asp-action="Create">
-        <input class="button button__link button__orange" type="button" value="+ Add New" />
+        <input class="button button__link" type="button" value="+ Add New" />
     </a>
 </div>
 
@@ -19,7 +19,7 @@
             : "todo todo__indent-bottom todo__task-completed";
 
         var todoText = !todoModel.IsActive
-            ? $"todo__text {todoModel.Priority}"
+            ? $"todo__text"
             : "todo__text todo__text-completed";
 
         var todoAction = !todoModel.IsActive
@@ -30,23 +30,35 @@
             ? ("in-progress.svg", "In progress")
             : ("completed.svg", "Completed");
 
-        <div class="@todoMainClass" title="@todoModel.Description">
+        <div class="@todoMainClass">
             <div class="todo__wrapper">
-                <a class="@todoText" asp-controller="Todo" asp-action="Detail" asp-route-id="@todoModel.Id">
-                    <span>@todoModel.Title</span>
-                </a>
-                <a class="todo__progress" asp-controller="Todo" asp-action="@todoAction" asp-route-id="@todoModel.Id">
-                    <img src="/images/@todoImage" alt="@todoAlt">
-                </a>
+                <span class="@todoText">@todoModel.Title</span>
+                <div class="todo__actions">
+                    <a asp-controller="Todo" asp-action="Detail" asp-route-id="@todoModel.Id">
+                        <img title="@todoModel.Description" src="/images/description.svg" alt="Description" />
+                    </a>
+                    <div class="tooltip">
+                        <img class="todo__status" src="/images/@todoImage" alt="@todoAlt">
+                        <span class="tooltiptext">
+                            <a class="todo__progress todo__text" data-delete asp-controller="Todo" asp-action="@todoAction" asp-route-id="@todoModel.Id">
+                                Execute
+                            </a>
+                        </span>
+                    </div>
+                </div>
             </div>
         </div>
     }
 }
 else
 {
-    <h1>Todo list is empty</h1>
+    <h1>Todo list is empty 😉</h1>
 }
 
 @section css {
     <link href="~/css/todo.css" rel="stylesheet" asp-append-version="true" />
+}
+
+@section js {
+    <script src="~/js/todo-delete.js" asp-append-version="true"></script>
 }
