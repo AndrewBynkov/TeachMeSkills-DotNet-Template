@@ -20,8 +20,9 @@ namespace TeachMeSkills.Web.Controllers
         private readonly IAccountManager _accountManager;
         private readonly ITodoManager _todoManager;
 
-        public TodoController(IAccountManager accountManager,
-                              ITodoManager todoManager)
+        public TodoController(
+            IAccountManager accountManager,
+            ITodoManager todoManager)
         {
             _accountManager = accountManager ?? throw new ArgumentNullException(nameof(accountManager));
             _todoManager = todoManager ?? throw new ArgumentNullException(nameof(todoManager));

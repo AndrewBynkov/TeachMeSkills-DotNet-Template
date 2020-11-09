@@ -1,24 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using NETCore.MailKit.Extensions;
 using NETCore.MailKit.Infrastructure.Internal;
 using TeachMeSkills.BusinessLogicLayer.Interfaces;
 using TeachMeSkills.BusinessLogicLayer.Managers;
+using TeachMeSkills.BusinessLogicLayer.Repository;
 using TeachMeSkills.DataAccessLayer.Contexts;
 using TeachMeSkills.DataAccessLayer.Entities;
 using TeachMeSkills.WebApi.Helpers;
@@ -40,7 +35,9 @@ namespace TeachMeSkills.WebApi
             services.Configure<JwtSettings>(Configuration.GetSection("Jwt"));
 
             // Managers
+            services.AddScoped(typeof(IRepositoryManager<>), typeof(RepositoryManager<>));
             services.AddScoped<IAccountManager, AccountManager>();
+            services.AddScoped<ITodoManager, TodoManager>();
 
             // Database context
             services.AddDbContext<TeachMeSkillsContext>(options =>
@@ -105,7 +102,6 @@ namespace TeachMeSkills.WebApi
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
 
             app.UseAuthorization();
 

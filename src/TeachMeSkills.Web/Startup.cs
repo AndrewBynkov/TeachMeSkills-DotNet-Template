@@ -28,10 +28,8 @@ namespace TeachMeSkills.Web
 
         public void ConfigureServices(IServiceCollection services)
         {
-            // Repository pattern (Generic)
-            services.AddScoped(typeof(IRepositoryManager<>), typeof(RepositoryManager<>));
-
             // Managers
+            services.AddScoped(typeof(IRepositoryManager<>), typeof(RepositoryManager<>));
             services.AddScoped<IAccountManager, AccountManager>();
             services.AddScoped<ITodoManager, TodoManager>();
 
