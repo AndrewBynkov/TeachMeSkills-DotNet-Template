@@ -46,7 +46,8 @@ namespace TeachMeSkills.Web
             // Microsoft services
             services.AddMemoryCache();
             services.AddControllersWithViews()
-                .AddRazorRuntimeCompilation(); ;
+                .AddRazorRuntimeCompilation();
+
             services.ConfigureApplicationCookie(config =>
             {
                 config.Cookie.Name = "TeachMeSkills.Cookie";
