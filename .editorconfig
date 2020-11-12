@@ -228,6 +228,9 @@ dotnet_diagnostic.CA1031.severity = none
 # CA1054: URI-like parameters should not be strings
 dotnet_diagnostic.CA1054.severity = none
 
+# CA1034: Nested types should not be visible
+dotnet_diagnostic.CA1034.severity = none
+
 [LoginViewModel.cs]
 dotnet_diagnostic.CA1056.severity = none
 

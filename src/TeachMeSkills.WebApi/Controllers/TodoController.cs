@@ -14,7 +14,7 @@ using TeachMeSkills.WebApi.Extensions;
 namespace TeachMeSkills.WebApi.Controllers
 {
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-    [Route("api/[controller]")]
+    [Route("api/todos")]
     [ApiController]
     public class TodoController : ControllerBase
     {
@@ -29,18 +29,25 @@ namespace TeachMeSkills.WebApi.Controllers
             _accountManager = accountManager ?? throw new ArgumentNullException(nameof(accountManager));
         }
 
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpGet]
         public async Task<IActionResult> GetAllAsync()
         {
             return Ok(await _todoManager.GetTodosAsync(await GetUserIdAsync()));
         }
 
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetAsync(int id)
         {
             return Ok(await _todoManager.GetTodoAsync(id, await GetUserIdAsync()));
         }
 
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpPost]
         public async Task<IActionResult> CreateAsync([FromBody] TodoActionRequest request)
         {
@@ -64,6 +71,9 @@ namespace TeachMeSkills.WebApi.Controllers
             return BadRequest();
         }
 
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateAsync(int id, [FromBody] TodoActionRequest request)
         {
@@ -88,6 +98,8 @@ namespace TeachMeSkills.WebApi.Controllers
             return Conflict();
         }
 
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAsync(int id)
         {
@@ -95,6 +107,8 @@ namespace TeachMeSkills.WebApi.Controllers
             return NoContent();
         }
 
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpGet("complete/{id}")]
         public async Task<IActionResult> CompleteAsync(int id)
         {
