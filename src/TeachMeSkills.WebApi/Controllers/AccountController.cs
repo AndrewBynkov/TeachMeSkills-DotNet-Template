@@ -21,8 +21,6 @@ namespace TeachMeSkills.WebApi.Controllers
     [ApiController]
     public class AccountController : ControllerBase
     {
-        // TODO: add some AccountResources
-
         private readonly IOptions<JwtSettings> _jwtOptions;
         private readonly SignInManager<User> _signInManager;
         private readonly UserManager<User> _userManager;
@@ -53,6 +51,7 @@ namespace TeachMeSkills.WebApi.Controllers
                     return Ok(new AuthResponse
                     {
                         IsSuccessful = true,
+                        Message = AccountResource.LoginSuccessful,
                         Token = await GenerateJwtToken(request.Username),
                     });
                 }
@@ -87,6 +86,7 @@ namespace TeachMeSkills.WebApi.Controllers
                     return Ok(new AuthResponse
                     {
                         IsSuccessful = true,
+                        Message = AccountResource.RegisterSuccessful,
                         Token = await GenerateJwtToken(request.Username),
                     });
                 }

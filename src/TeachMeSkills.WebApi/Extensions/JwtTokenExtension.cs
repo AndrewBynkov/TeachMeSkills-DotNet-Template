@@ -14,7 +14,7 @@ namespace TeachMeSkills.WebApi.Extensions
         /// </summary>
         /// <param name="httpContext">Application HttpContext.</param>
         /// <returns>Identifier.</returns>
-        public static string GetUserId(this HttpContext httpContext)
+        public static string GetUserName(this HttpContext httpContext)
         {
             httpContext = httpContext ?? throw new ArgumentNullException(nameof(httpContext));
 

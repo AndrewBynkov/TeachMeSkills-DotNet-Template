@@ -13,8 +13,6 @@ using TeachMeSkills.Web.ViewModels;
 // TODO:
 // refactoring code
 // check exceptions
-// use AutoMapper
-// WebApi
 
 namespace TeachMeSkills.Web.Controllers
 {

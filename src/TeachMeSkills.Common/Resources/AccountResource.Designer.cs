@@ -68,5 +68,23 @@ namespace TeachMeSkills.Common.Resources {
                 return ResourceManager.GetString("IncorrectData", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You have been logged in..
+        /// </summary>
+        public static string LoginSuccessful {
+            get {
+                return ResourceManager.GetString("LoginSuccessful", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You have been registered..
+        /// </summary>
+        public static string RegisterSuccessful {
+            get {
+                return ResourceManager.GetString("RegisterSuccessful", resourceCulture);
+            }
+        }
     }
 }
