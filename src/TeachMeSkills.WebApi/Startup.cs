@@ -11,6 +11,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using NETCore.MailKit.Extensions;
 using NETCore.MailKit.Infrastructure.Internal;
+using Serilog;
 using TeachMeSkills.BusinessLogicLayer.Interfaces;
 using TeachMeSkills.BusinessLogicLayer.Managers;
 using TeachMeSkills.BusinessLogicLayer.Repository;
@@ -93,6 +94,8 @@ namespace TeachMeSkills.WebApi
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseSerilogRequestLogging();
 
             app.UseCors(x => x
                 .SetIsOriginAllowed(origin => true)
