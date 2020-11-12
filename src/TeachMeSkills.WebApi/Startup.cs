@@ -16,6 +16,7 @@ using TeachMeSkills.BusinessLogicLayer.Managers;
 using TeachMeSkills.BusinessLogicLayer.Repository;
 using TeachMeSkills.DataAccessLayer.Contexts;
 using TeachMeSkills.DataAccessLayer.Entities;
+using TeachMeSkills.WebApi.Extensions;
 using TeachMeSkills.WebApi.Helpers;
 
 namespace TeachMeSkills.WebApi
@@ -103,7 +104,10 @@ namespace TeachMeSkills.WebApi
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseMiddleware<ErrorHandlerMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {
