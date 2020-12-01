@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -8,7 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 using TeachMeSkills.BusinessLogicLayer.Interfaces;
 using TeachMeSkills.BusinessLogicLayer.Models;
 using TeachMeSkills.WebApi.Contracts.Requests;
-using TeachMeSkills.WebApi.Contracts.Responses;
 using TeachMeSkills.WebApi.Extensions;
 
 namespace TeachMeSkills.WebApi.Controllers

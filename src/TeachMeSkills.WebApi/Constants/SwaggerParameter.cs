@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace TeachMeSkills.WebApi.Constants
+﻿namespace TeachMeSkills.WebApi.Constants
 {
     /// <summary>
     /// Swagger parameters.

@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
-using System;
 using TeachMeSkills.Web.ViewModels;
 
 namespace TeachMeSkills.Web.Controllers

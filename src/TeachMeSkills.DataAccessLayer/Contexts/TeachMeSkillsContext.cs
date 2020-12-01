@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using System;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System;
 using TeachMeSkills.DataAccessLayer.Configurations;
 using TeachMeSkills.DataAccessLayer.Entities;
 

@@ -1,11 +1,9 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using NETCore.MailKit.Core;
-using System;
-using System.Threading.Tasks;
-using TeachMeSkills.BusinessLogicLayer.Interfaces;
-using TeachMeSkills.BusinessLogicLayer.Models;
 using TeachMeSkills.Common.Resources;
 using TeachMeSkills.DataAccessLayer.Entities;
 using TeachMeSkills.Web.ViewModels;

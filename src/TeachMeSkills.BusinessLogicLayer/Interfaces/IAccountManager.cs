@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-using System.Threading.Tasks;
-using TeachMeSkills.BusinessLogicLayer.Models;
+﻿using System.Threading.Tasks;
 
 namespace TeachMeSkills.BusinessLogicLayer.Interfaces
 {

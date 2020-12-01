@@ -1,7 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using System;
 using TeachMeSkills.Common.Constants;
 using TeachMeSkills.Common.Enums;
 using TeachMeSkills.DataAccessLayer.Entities;
